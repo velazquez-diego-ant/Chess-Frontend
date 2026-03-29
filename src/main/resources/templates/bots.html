@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::content})}">
+
+<section th:fragment="content">
+  <header class="page-header">
+    <h1>Jugar vs Bots</h1>
+    <p>Selecciona una dificultad.</p>
+  </header>
+
+  <div class="levels" id="botLevels">
+    <div class="level" data-level="principiante">
+      <div>
+        <strong>Principiante</strong>
+        <div class="muted">Para empezar.</div>
+      </div>
+      <a class="btn" th:href="@{/jugar/bots/principiante}">Jugar</a>
+    </div>
+
+    <div class="level" data-level="intermedio">
+      <div>
+        <strong>Intermedio</strong>
+        <div class="muted">Más reto.</div>
+      </div>
+      <a class="btn" th:href="@{/jugar/bots/intermedio}">Jugar</a>
+    </div>
+
+    <div class="level" data-level="avanzado">
+      <div>
+        <strong>Avanzado</strong>
+        <div class="muted">Decisiones más fuertes.</div>
+      </div>
+      <a class="btn" th:href="@{/jugar/bots/avanzado}">Jugar</a>
+    </div>
+
+    <div class="level" data-level="maestro">
+      <div>
+        <strong>Maestro</strong>
+        <div class="muted">Máximo (placeholder).</div>
+      </div>
+      <a class="btn" th:href="@{/jugar/bots/maestro}">Jugar</a>
+    </div>
+  </div>
+</section>
+
+</html>

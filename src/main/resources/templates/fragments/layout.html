@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(content)">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title th:text="${title} ?: 'Chess UI'">Chess UI</title>
+
+  <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css" />
+  <script defer th:src="@{/js/ui.js}" src="/js/ui.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-title">Chess UI</div>
+          <div class="brand-subtitle" th:text="${title} ?: 'Panel'">Panel</div>
+        </div>
+
+        <button id="sidebarToggle" class="btn btn--ghost" type="button" aria-label="Abrir/cerrar menú">
+          Menú
+        </button>
+      </div>
+
+      <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    </aside>
+
+    <main class="content">
+      <div class="page">
+        <th:block th:replace="${content}"></th:block>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

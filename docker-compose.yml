@@ -1,0 +1,9 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: chess_frontend_app
+    ports:
+      - "8081:8080" 
+    restart: unless-stopped

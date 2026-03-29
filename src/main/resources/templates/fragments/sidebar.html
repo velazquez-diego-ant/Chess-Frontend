@@ -1,0 +1,20 @@
+<nav class="nav" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
+  <a class="nav-link" th:href="@{/}" th:classappend="${active} == 'home' ? ' active' : ''">Inicio</a>
+
+  <a class="nav-link" th:href="@{/}" th:classappend="${active} == 'home' ? '' : ''">Jugar</a>
+
+  <a class="nav-link" th:href="@{/jugar/bots}" th:classappend="${active} == 'bots' ? ' active' : ''">Jugar vs Bots</a>
+
+  <div class="nav-sep"></div>
+
+  <a class="nav-link" th:href="@{/problemas}" th:classappend="${active} == 'problemas' ? ' active' : ''">Problemas</a>
+  <a class="nav-link" th:href="@{/aprender}" th:classappend="${active} == 'aprender' ? ' active' : ''">Aprender</a>
+  <a class="nav-link" th:href="@{/entrenar}" th:classappend="${active} == 'entrenar' ? ' active' : ''">Entrenar</a>
+  <a class="nav-link" th:href="@{/reglas}" th:classappend="${active} == 'reglas' ? ' active' : ''">Reglas</a>
+  <a class="nav-link" th:href="@{/bases}" th:classappend="${active} == 'bases' ? ' active' : ''">Bases</a>
+  <a class="nav-link" th:href="@{/explorador}" th:classappend="${active} == 'explorador' ? ' active' : ''">Explorador</a>
+
+  <div class="nav-sep"></div>
+
+  <a class="nav-link" th:href="@{/cerrar-sesion}" th:classappend="${active} == 'cerrar-sesion' ? ' active' : ''">Cerrar sesión</a>
+</nav>

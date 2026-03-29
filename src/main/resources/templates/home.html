@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::content})}">
+
+<section th:fragment="content">
+  <header class="page-header">
+    <h1>Inicio</h1>
+    <p>Elige una opción para comenzar.</p>
+  </header>
+
+  <div class="card-grid">
+    <a class="card" th:href="@{/jugar/bots}">
+      <h3>Jugar contra Bots</h3>
+      <p>Selecciona un nivel y empieza una partida.</p>
+      <span class="btn">Ir</span>
+    </a>
+
+    <a class="card" th:href="@{/aprender}">
+      <h3>Jugar con un Maestro</h3>
+      <p>Sección de aprendizaje (placeholder).</p>
+      <span class="btn">Ir</span>
+    </a>
+
+    <a class="card" th:href="@{/entrenar}">
+      <h3>Jugar con un Amigo</h3>
+      <p>Entrenar/partida amistosa (placeholder).</p>
+      <span class="btn">Ir</span>
+    </a>
+  </div>
+</section>
+
+</html>

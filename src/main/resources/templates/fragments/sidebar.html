@@ -1,20 +1,81 @@
 <nav class="nav" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
-  <a class="nav-link" th:href="@{/}" th:classappend="${active} == 'home' ? ' active' : ''">Inicio</a>
+  
+  <!-- JUGAR -->
+  <a class="nav-link" th:href="@{/}" th:classappend="${active} == 'home' ? ' active' : ''" data-nav="jugar">
+    <span class="nav-icon">
+      <!-- Icono normal (color café/inactivo) -->
+      <img src="/images/icons/icono-jugar.svg" alt="" class="icon-normal">
+      <!-- Icono activo (color oscuro para fondo blanco) -->
+      <img src="/images/icons/icono-jugar-active.svg" alt="" class="icon-active">
+    </span>
+    Jugar
+  </a>
+  
+  <div class="nav-sep"></div>
 
-  <a class="nav-link" th:href="@{/}" th:classappend="${active} == 'home' ? '' : ''">Jugar</a>
+  <!-- PROBLEMAS -->
+  <a class="nav-link" th:href="@{/problemas}" th:classappend="${active} == 'problemas' ? ' active' : ''" data-nav="problemas">
+    <span class="nav-icon">
+      <img src="/images/icons/icono-problemas.svg" alt="" class="icon-normal">
+      <img src="/images/icons/icono-problemas-active.svg" alt="" class="icon-active">
+    </span>
+    Problemas
+  </a>
 
-  <a class="nav-link" th:href="@{/jugar/bots}" th:classappend="${active} == 'bots' ? ' active' : ''">Jugar vs Bots</a>
+  <!-- APRENDER -->
+  <a class="nav-link" th:href="@{/aprender}" th:classappend="${active} == 'aprender' ? ' active' : ''" data-nav="aprender">
+    <span class="nav-icon">
+      <img src="/images/icons/icono-aprender.svg" alt="" class="icon-normal">
+      <img src="/images/icons/icono-aprender-active.svg" alt="" class="icon-active">
+    </span>
+    Aprender
+  </a>
+
+  <!-- ENTRENAR -->
+  <a class="nav-link" th:href="@{/entrenar}" th:classappend="${active} == 'entrenar' ? ' active' : ''" data-nav="entrenar">
+    <span class="nav-icon">
+      <img src="/images/icons/icono-entrenar.svg" alt="" class="icon-normal">
+      <img src="/images/icons/icono-entrenar-active.svg" alt="" class="icon-active">
+    </span>
+    Entrenar
+  </a>
+
+  <!-- REGLAS -->
+  <a class="nav-link" th:href="@{/reglas}" th:classappend="${active} == 'reglas' ? ' active' : ''" data-nav="reglas">
+    <span class="nav-icon">
+      <img src="/images/icons/icono-reglas.svg" alt="" class="icon-normal">
+      <img src="/images/icons/icono-reglas-active.svg" alt="" class="icon-active">
+    </span>
+    Reglas
+  </a>
+
+  <!-- BASES DE PARTIDAS -->
+  <a class="nav-link" th:href="@{/bases}" th:classappend="${active} == 'bases' ? ' active' : ''" data-nav="bases">
+    <span class="nav-icon">
+      <img src="/images/icons/icono-bases.svg" alt="" class="icon-normal">
+      <img src="/images/icons/icono-bases-active.svg" alt="" class="icon-active">
+    </span>
+    Bases de partidas
+  </a>
+
+  <!-- EXPLORADOR -->
+  <a class="nav-link" th:href="@{/explorador}" th:classappend="${active} == 'explorador' ? ' active' : ''" data-nav="explorador">
+    <span class="nav-icon">
+      <img src="/images/icons/icono-explorador.svg" alt="" class="icon-normal">
+      <img src="/images/icons/icono-explorador-active.svg" alt="" class="icon-active">
+    </span>
+    Explorador
+  </a>
 
   <div class="nav-sep"></div>
 
-  <a class="nav-link" th:href="@{/problemas}" th:classappend="${active} == 'problemas' ? ' active' : ''">Problemas</a>
-  <a class="nav-link" th:href="@{/aprender}" th:classappend="${active} == 'aprender' ? ' active' : ''">Aprender</a>
-  <a class="nav-link" th:href="@{/entrenar}" th:classappend="${active} == 'entrenar' ? ' active' : ''">Entrenar</a>
-  <a class="nav-link" th:href="@{/reglas}" th:classappend="${active} == 'reglas' ? ' active' : ''">Reglas</a>
-  <a class="nav-link" th:href="@{/bases}" th:classappend="${active} == 'bases' ? ' active' : ''">Bases</a>
-  <a class="nav-link" th:href="@{/explorador}" th:classappend="${active} == 'explorador' ? ' active' : ''">Explorador</a>
-
-  <div class="nav-sep"></div>
-
-  <a class="nav-link" th:href="@{/cerrar-sesion}" th:classappend="${active} == 'cerrar-sesion' ? ' active' : ''">Cerrar sesión</a>
+  <!-- CERRAR SESIÓN -->
+  <a class="nav-link logout" th:href="@{/cerrar-sesion}" data-nav="cerrar">
+    <span class="nav-icon">
+      <!-- Solo un icono SVG oscuro para fondo dorado -->
+      <img src="/images/icons/icono-cerrar.svg" alt="" class="icon-normal">
+      <!-- No hay icon-active para este botón -->
+    </span>
+    Cerrar sesión
+  </a>
 </nav>

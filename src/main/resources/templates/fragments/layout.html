@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title th:text="${title} ?: 'Chess UI'">Chess UI</title>
+  <title th:text="${title} ?: 'KING.COM'">KING.COM</title>
 
   <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css" />
   <script defer th:src="@{/js/ui.js}" src="/js/ui.js"></script>
@@ -12,15 +12,14 @@
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
+      <!-- Solo el logo KING.COM como imagen SVG -->
       <div class="sidebar-header">
         <div class="brand">
-          <div class="brand-title">Chess UI</div>
-          <div class="brand-subtitle" th:text="${title} ?: 'Panel'">Panel</div>
+          <div class="brand-logo">
+            <!-- Tu imagen SVG del logo -->
+            <img src="/images/logo-king.svg" alt="KING.COM" width="120" height="40">
+          </div>
         </div>
-
-        <button id="sidebarToggle" class="btn btn--ghost" type="button" aria-label="Abrir/cerrar menú">
-          Menú
-        </button>
       </div>
 
       <div th:replace="~{fragments/sidebar :: sidebar}"></div>

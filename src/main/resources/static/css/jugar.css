@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap');
+
+/* ===== RESET Y BASE ===== */
+.jugar-page {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.jugar-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+
+/* ===== TABLERO (IZQUIERDA) ===== */
+.tablero-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 560px;
+}
+
+/* Tablero - NO ARRASTRABLE, NO SELECCIONABLE */
+.tablero-jugar {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  background: #fff;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none;
+}
+
+.tablero-jugar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-drag: none !important;
+  draggable: false;
+}
+
+/* ===== PANEL DE OPCIONES (DERECHA) ===== */
+.panel-opciones {
+  width: 340px;
+  min-width: 340px;
+  background: rgba(53, 39, 33, 0.6); /* #352721 al 60% */
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+/* ===== BOTONES ===== */
+.btn-opcion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: rgba(89, 78, 72, 0.5); /* #594E48 al 50% */
+  border: 2px solid transparent;
+  border-radius: 10px; /* Radio 10px */
+  color: #fff;
+  font-family: 'Alexandria', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  width: 100%;
+}
+
+/* Hover - 100% opacidad */
+.btn-opcion:hover {
+  background: rgba(89, 78, 72, 1); /* 100% */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* Active/Click */
+.btn-opcion:active {
+  transform: translateY(0);
+  background: rgba(74, 65, 60, 1);
+}
+
+/* ===== ICONOS ===== */
+.btn-icono {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-icono img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .jugar-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .panel-opciones {
+    width: 100%;
+    max-width: 400px;
+    min-width: auto;
+  }
+  
+  .tablero-wrapper {
+    max-width: 100%;
+    order: -1;
+  }
+  
+  .tablero-jugar {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .jugar-layout {
+    padding: 12px;
+    gap: 24px;
+  }
+  
+  .panel-opciones {
+    padding: 20px;
+    gap: 12px;
+  }
+  
+  .btn-opcion {
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+  
+  .btn-icono {
+    width: 24px;
+    height: 24px;
+  }
+}

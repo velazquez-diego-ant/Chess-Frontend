@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap');
+
+/* ===== SOLO PARA ESTA PÁGINA ===== */
+body.pagina-bots {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+body.pagina-bots .content {
+  overflow: hidden !important;
+  height: 100vh !important;
+  padding: 0 !important;
+}
+
+body.pagina-bots .page {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.bots-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  overflow: hidden !important;
+  position: relative;
+}
+
+/* ===== LAYOUT ===== */
+.bots-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  overflow: hidden;
+}
+
+/* ===== TABLERO ===== */
+.tablero-wrapper {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.tablero-ajedrez {
+  width: 360px;
+  height: 360px;
+  max-width: 360px;
+  max-height: 360px;
+  min-width: 360px;
+  min-height: 360px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  background: #fff;
+  user-select: none !important;
+  pointer-events: none;
+}
+
+.tablero-ajedrez img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  draggable: false;
+}
+
+/* ===== PANEL - ANCHO AUMENTADO ===== */
+.panel-dificultad {
+  width: 420px; /* Aumentado de 380px a 420px para más espacio */
+  min-width: 420px;
+  max-width: 420px;
+  background: rgba(53, 39, 33, 0.6);
+  border-radius: 16px;
+  padding: 24px 28px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  max-height: 85vh;
+}
+
+/* ===== PERFIL DEL BOT ===== */
+.perfil-bot {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(59,39,33,0.1);
+  flex-shrink: 0;
+}
+
+/* Avatar SIN fondo circular */
+.avatar-bot {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-bot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-bot {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-bot h3 {
+  font-family: 'Alexandria', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.elo-bot {
+  font-family: 'Alexandria', sans-serif;
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+}
+
+/* ===== BARRA DE ELO ===== */
+.barra-elo-container {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.barra-elo {
+  position: relative;
+  height: 32px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Marcadores de nivel */
+.marcadores-elo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+}
+
+.marcador-elo {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.linea-marcador {
+  width: 2px;
+  height: 10px;
+  background: rgba(255,255,255,0.5);
+  margin-top: 6px;
+}
+
+.numero-elo {
+  font-family: 'Alexandria', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* Indicador actual (círculo blanco) - AHORA SE MUEVE Y SE PUEDE ARRASTRAR */
+.indicador-elo {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: left 0.1s ease;
+  z-index: 10;
+  cursor: grab;
+  pointer-events: auto;
+}
+
+.indicador-elo:active {
+  cursor: grabbing;
+}
+
+/* Corona de victoria - POSICIONADA MÁS ABAJO PARA EVITAR SUPERPOSICIÓN */
+.corona-victoria {
+  position: absolute;
+  bottom: -24px;
+  width: 24px;
+  height: 24px;
+  transform: translateX(-50%);
+  transition: left 0.3s ease;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.corona-victoria img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* ===== OPCIONES DE DIFICULTAD ===== */
+.opciones-dificultad {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn-dificultad {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: rgba(89, 78, 72, 0.5);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Alexandria', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.btn-dificultad:hover {
+  background: rgba(89, 78, 72, 0.8);
+  transform: translateX(2px);
+}
+
+.btn-dificultad.selected {
+  background: rgba(89, 78, 72, 1);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.icono-dificultad {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.icono-dificultad img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ===== SELECCIÓN DE FICHAS ===== */
+.seccion-fichas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.titulo-fichas {
+  font-family: 'Alexandria', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.opciones-fichas {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.btn-ficha {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(82, 47, 44, 0.5);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.btn-ficha:hover {
+  background: rgba(82, 47, 44, 0.8);
+  transform: scale(1.05);
+}
+
+.btn-ficha.selected {
+  background: rgba(82, 47, 44, 1);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.btn-ficha img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.btn-ficha .icono-normal {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-ficha .icono-activo {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-ficha.selected .icono-normal {
+  display: none;
+}
+
+.btn-ficha.selected .icono-activo {
+  display: block;
+}
+
+/* ===== BOTÓN JUGAR ===== */
+.contenedor-jugar {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-jugar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: rgba(89, 78, 72, 0.3);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Alexandria', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 180px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.btn-jugar.activo {
+  background: rgba(89, 78, 72, 1);
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-jugar.activo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.btn-jugar img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  opacity: 0.4;
+}
+
+.btn-jugar.activo img {
+  opacity: 1;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-height: 700px) {
+  .tablero-ajedrez {
+    width: 320px;
+    height: 320px;
+    max-width: 320px;
+    max-height: 320px;
+    min-width: 320px;
+    min-height: 320px;
+  }
+  
+  .avatar-bot {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .info-bot h3 {
+    font-size: 20px;
+  }
+  
+  .panel-dificultad {
+    padding: 18px 22px;
+    gap: 12px;
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 900px) {
+  .bots-layout {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .tablero-ajedrez {
+    width: 300px;
+    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 300px;
+    min-height: 300px;
+  }
+  
+  .panel-dificultad {
+    width: 100%;
+    max-width: 420px;
+    min-width: auto;
+  }
+}

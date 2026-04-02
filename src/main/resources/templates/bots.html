@@ -2,45 +2,414 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout(~{::content})}">
 
-<section th:fragment="content">
-  <header class="page-header">
-    <h1>Jugar vs Bots</h1>
-    <p>Selecciona una dificultad.</p>
-  </header>
+<head>
+  <title>Jugar vs Bots - Chess UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/bots.css}" href="/css/bots.css">
+</head>
 
-  <div class="levels" id="botLevels">
-    <div class="level" data-level="principiante">
-      <div>
-        <strong>Principiante</strong>
-        <div class="muted">Para empezar.</div>
+<section th:fragment="content" class="bots-page">
+  
+  <script>
+    document.body.classList.add('pagina-bots');
+  </script>
+  
+  <div class="bots-layout">
+    
+    <!-- Tablero de Ajedrez (IZQUIERDA) -->
+    <div class="tablero-wrapper">
+      <div class="tablero-ajedrez" aria-label="Tablero de ajedrez">
+        <img th:src="@{/images/tablero-ajedrez-jugar.svg}" 
+             src="/images/tablero-ajedrez-jugar.svg" 
+             alt="Tablero de ajedrez con piezas"
+             draggable="false"
+             ondragstart="return false;">
       </div>
-      <a class="btn" th:href="@{/jugar/bots/principiante}">Jugar</a>
     </div>
 
-    <div class="level" data-level="intermedio">
-      <div>
-        <strong>Intermedio</strong>
-        <div class="muted">Más reto.</div>
+    <!-- Panel de Dificultad (DERECHA) - ANCHO AUMENTADO -->
+    <div class="panel-dificultad">
+      
+      <!-- PERFIL DEL BOT SELECCIONADO -->
+      <div class="perfil-bot" id="perfilBot">
+        <div class="avatar-bot">
+          <img id="avatarBotImg" th:src="@{/images/icons/icono-bot-principiante.svg}" 
+               src="/images/icons/icono-bot-principiante.svg" 
+               alt="Bot">
+        </div>
+        <div class="info-bot">
+          <h3 id="nombreBot">Ricardo</h3>
+          <p class="elo-bot">Elo: <span id="eloBot">500</span></p>
+          
+          <!-- Barra de ELO - AHORA CON DRAG Y CLICK -->
+          <div class="barra-elo-container">
+            <div class="barra-elo" id="barraElo">
+              <!-- Marcadores de nivel -->
+              <div class="marcadores-elo" id="marcadoresElo">
+                <!-- Se generan dinámicamente -->
+              </div>
+              <!-- Indicador actual (CÍRCULO MÓVIL) -->
+              <div class="indicador-elo" id="indicadorElo"></div>
+              <!-- Corona de victoria -->
+              <div class="corona-victoria" id="coronaVictoria">
+                <img th:src="@{/images/icons/icono-corona-oro.svg}" 
+                     src="/images/icons/icono-corona-oro.svg" 
+                     alt="Victoria">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <a class="btn" th:href="@{/jugar/bots/intermedio}">Jugar</a>
-    </div>
 
-    <div class="level" data-level="avanzado">
-      <div>
-        <strong>Avanzado</strong>
-        <div class="muted">Decisiones más fuertes.</div>
-      </div>
-      <a class="btn" th:href="@{/jugar/bots/avanzado}">Jugar</a>
-    </div>
+      <!-- Opciones de Dificultad -->
+      <div class="opciones-dificultad" id="dificultadOpciones">
+        
+        <!-- Principiante: 500-1000 (100 cada barra) -->
+        <button class="btn-dificultad" data-dificultad="principiante" 
+                data-nombre="Ricardo" data-elo="500" 
+                data-min="500" data-max="1000" data-step="100"
+                data-avatar="icono-bot-principiante.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{/images/icons/icono-bot-principiante.svg}" 
+                 src="/images/icons/icono-bot-principiante.svg" 
+                 alt="Principiante" draggable="false">
+          </span>
+          <span>Principiante</span>
+        </button>
 
-    <div class="level" data-level="maestro">
-      <div>
-        <strong>Maestro</strong>
-        <div class="muted">Máximo (placeholder).</div>
+        <!-- Intermedio: 1100-1600 (100 cada barra) -->
+        <button class="btn-dificultad" data-dificultad="intermedio" 
+                data-nombre="Carlos" data-elo="1100"
+                data-min="1100" data-max="1600" data-step="100"
+                data-avatar="icono-bot-intermedio.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{/images/icons/icono-bot-intermedio.svg}" 
+                 src="/images/icons/icono-bot-intermedio.svg" 
+                 alt="Intermedio" draggable="false">
+          </span>
+          <span>Intermedio</span>
+        </button>
+
+        <!-- Avanzado: 1700-2200 (100 cada barra) -->
+        <button class="btn-dificultad" data-dificultad="avanzado" 
+                data-nombre="Ana" data-elo="1700"
+                data-min="1700" data-max="2200" data-step="100"
+                data-avatar="icono-bot-avanzado.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{/images/icons/icono-bot-avanzado.svg}" 
+                 src="/images/icons/icono-bot-avanzado.svg" 
+                 alt="Avanzado" draggable="false">
+          </span>
+          <span>Avanzado</span>
+        </button>
+
+        <!-- Maestro: 2300-3300 (200 cada barra) -->
+        <button class="btn-dificultad" data-dificultad="maestro" 
+                data-nombre="Víctor" data-elo="2300"
+                data-min="2300" data-max="3300" data-step="200"
+                data-avatar="icono-bot-maestro.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{/images/icons/icono-bot-maestro.svg}" 
+                 src="/images/icons/icono-bot-maestro.svg" 
+                 alt="Maestro" draggable="false">
+          </span>
+          <span>Maestro</span>
+        </button>
+
       </div>
-      <a class="btn" th:href="@{/jugar/bots/maestro}">Jugar</a>
+
+      <!-- Selección de Fichas -->
+      <div class="seccion-fichas">
+        <div class="titulo-fichas">Selecciona tu color</div>
+        
+        <div class="opciones-fichas" id="fichaOpciones">
+          
+          <button class="btn-ficha" data-ficha="blanca" title="Blancas">
+            <img class="icono-normal" 
+                 th:src="@{/images/icons/icono-ficha-blanca.svg}" 
+                 src="/images/icons/icono-ficha-blanca.svg" 
+                 alt="Blancas" draggable="false">
+            <img class="icono-activo" 
+                 th:src="@{/images/icons/icono-ficha-blanca-activa.svg}" 
+                 src="/images/icons/icono-ficha-blanca-activa.svg" 
+                 alt="Blancas" draggable="false">
+          </button>
+
+          <button class="btn-ficha" data-ficha="aleatoria" title="Aleatorio">
+            <img class="icono-normal" 
+                 th:src="@{/images/icons/icono-ficha-aleatoria.svg}" 
+                 src="/images/icons/icono-ficha-aleatoria.svg" 
+                 alt="Aleatorio" draggable="false">
+            <img class="icono-activo" 
+                 th:src="@{/images/icons/icono-ficha-aleatoria-activa.svg}" 
+                 src="/images/icons/icono-ficha-aleatoria-activa.svg" 
+                 alt="Aleatorio" draggable="false">
+          </button>
+
+          <button class="btn-ficha" data-ficha="negra" title="Negras">
+            <img class="icono-normal" 
+                 th:src="@{/images/icons/icono-ficha-negra.svg}" 
+                 src="/images/icons/icono-ficha-negra.svg" 
+                 alt="Negras" draggable="false">
+            <img class="icono-activo" 
+                 th:src="@{/images/icons/icono-ficha-negra-activa.svg}" 
+                 src="/images/icons/icono-ficha-negra-activa.svg" 
+                 alt="Negras" draggable="false">
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Botón Jugar -->
+      <div class="contenedor-jugar">
+        <a class="btn-jugar" id="btnJugar" th:href="@{/jugar/partida}">
+          <img th:src="@{/images/icons/icono-corona.svg}" src="/images/icons/icono-corona.svg" alt="">
+          <span>Jugar</span>
+        </a>
+      </div>
+
     </div>
   </div>
+
+  <!-- Script con funcionalidad de arrastre del círculo -->
+  <script>
+    (function() {
+      let dificultadSeleccionada = null;
+      let fichaSeleccionada = null;
+      let victorias = 0;
+      
+      // Variables para arrastre
+      let isDragging = false;
+      let currentMin = 500;
+      let currentMax = 1000;
+      let currentStep = 100;
+      let currentElo = 500;
+      
+      const botonesDificultad = document.querySelectorAll('.btn-dificultad');
+      const botonesFicha = document.querySelectorAll('.btn-ficha');
+      const btnJugar = document.getElementById('btnJugar');
+      
+      // Elementos del perfil
+      const avatarBotImg = document.getElementById('avatarBotImg');
+      const nombreBot = document.getElementById('nombreBot');
+      const eloBot = document.getElementById('eloBot');
+      const marcadoresElo = document.getElementById('marcadoresElo');
+      const indicadorElo = document.getElementById('indicadorElo');
+      const coronaVictoria = document.getElementById('coronaVictoria');
+      const barraElo = document.getElementById('barraElo');
+      
+      // Función para calcular ELO según posición
+      function calcularEloDesdePosicion(porcentaje, min, max, step) {
+        const rawValue = min + (porcentaje / 100) * (max - min);
+        const stepsCount = Math.round((rawValue - min) / step);
+        const eloValue = min + (stepsCount * step);
+        return Math.min(max, Math.max(min, eloValue));
+      }
+      
+      // Mover indicador a posición específica (porcentaje)
+      function moverIndicador(porcentaje) {
+        const porcentajeLimitado = Math.min(100, Math.max(0, porcentaje));
+        indicadorElo.style.left = porcentajeLimitado + '%';
+      }
+      
+      // Actualizar ELO y mover indicador
+      function actualizarElo(nuevoElo) {
+        currentElo = nuevoElo;
+        eloBot.textContent = currentElo;
+        
+        const porcentaje = ((currentElo - currentMin) / (currentMax - currentMin)) * 100;
+        moverIndicador(porcentaje);
+        actualizarCorona();
+      }
+      
+      // Actualizar posición de la corona de victoria
+      function actualizarCorona() {
+        const maxVictorias = 5;
+        const porcentajeVictoria = Math.min(victorias / maxVictorias, 1) * 100;
+        coronaVictoria.style.left = porcentajeVictoria + '%';
+        coronaVictoria.style.opacity = victorias > 0 ? '1' : '0.3';
+      }
+      
+      // Generar barra de ELO
+      function generarBarraElo(min, max, step, eloActual) {
+        currentMin = min;
+        currentMax = max;
+        currentStep = step;
+        currentElo = eloActual;
+        
+        marcadoresElo.innerHTML = '';
+        const totalSteps = (max - min) / step;
+      
+        for (let i = 0; i <= totalSteps; i++) {
+          const valor = min + (i * step);
+          const marcador = document.createElement('div');
+          marcador.className = 'marcador-elo';
+          marcador.style.left = (i / totalSteps * 100) + '%';
+          
+          const linea = document.createElement('div');
+          linea.className = 'linea-marcador';
+          marcador.appendChild(linea);
+        
+          const numero = document.createElement('span');
+          numero.className = 'numero-elo';
+          numero.textContent = valor;
+          marcador.appendChild(numero);
+        
+          marcadoresElo.appendChild(marcador);
+        }
+        
+        const porcentaje = ((eloActual - min) / (max - min)) * 100;
+        moverIndicador(porcentaje);
+        actualizarCorona();
+      }
+      
+      // FUNCIONES DE ARRASTRE DEL CÍRCULO
+      function handleDragStart(e) {
+        e.preventDefault();
+        isDragging = true;
+      }
+      
+      function handleDragMove(e) {
+        if (!isDragging) return;
+        
+        const rect = barraElo.getBoundingClientRect();
+        let clientX;
+        
+        if (e.touches) {
+          clientX = e.touches[0].clientX;
+          e.preventDefault();
+        } else {
+          clientX = e.clientX;
+        }
+        
+        let x = clientX - rect.left;
+        let porcentaje = (x / rect.width) * 100;
+        porcentaje = Math.min(100, Math.max(0, porcentaje));
+        
+        const nuevoElo = calcularEloDesdePosicion(porcentaje, currentMin, currentMax, currentStep);
+        
+        if (nuevoElo !== currentElo) {
+          actualizarElo(nuevoElo);
+          
+          // Actualizar el atributo data-elo del botón seleccionado
+          const btnSeleccionado = document.querySelector('.btn-dificultad.selected');
+          if (btnSeleccionado) {
+            btnSeleccionado.setAttribute('data-elo', nuevoElo);
+          }
+        }
+      }
+      
+      function handleDragEnd() {
+        isDragging = false;
+      }
+      
+      // Click en la barra
+      function handleBarClick(e) {
+        const rect = barraElo.getBoundingClientRect();
+        let clientX;
+        
+        if (e.touches) {
+          clientX = e.touches[0].clientX;
+        } else {
+          clientX = e.clientX;
+        }
+        
+        let x = clientX - rect.left;
+        let porcentaje = (x / rect.width) * 100;
+        porcentaje = Math.min(100, Math.max(0, porcentaje));
+        
+        const nuevoElo = calcularEloDesdePosicion(porcentaje, currentMin, currentMax, currentStep);
+        
+        if (nuevoElo !== currentElo) {
+          actualizarElo(nuevoElo);
+          
+          const btnSeleccionado = document.querySelector('.btn-dificultad.selected');
+          if (btnSeleccionado) {
+            btnSeleccionado.setAttribute('data-elo', nuevoElo);
+          }
+        }
+      }
+      
+      // Eventos para arrastre (mouse y touch)
+      indicadorElo.addEventListener('mousedown', handleDragStart);
+      window.addEventListener('mousemove', handleDragMove);
+      window.addEventListener('mouseup', handleDragEnd);
+      
+      indicadorElo.addEventListener('touchstart', handleDragStart);
+      window.addEventListener('touchmove', handleDragMove);
+      window.addEventListener('touchend', handleDragEnd);
+      
+      // Click en la barra
+      barraElo.addEventListener('click', handleBarClick);
+      barraElo.addEventListener('touchstart', function(e) {
+        if (e.target === indicadorElo) return;
+        handleBarClick(e);
+      });
+      
+      // Seleccionar dificultad
+      botonesDificultad.forEach(btn => {
+        btn.addEventListener('click', function() {
+          botonesDificultad.forEach(b => b.classList.remove('selected'));
+          this.classList.add('selected');
+          
+          dificultadSeleccionada = this.getAttribute('data-dificultad');
+          
+          // Actualizar perfil del bot
+          const nombre = this.getAttribute('data-nombre');
+          const elo = parseInt(this.getAttribute('data-elo'));
+          const min = parseInt(this.getAttribute('data-min'));
+          const max = parseInt(this.getAttribute('data-max'));
+          const step = parseInt(this.getAttribute('data-step'));
+          const avatar = this.getAttribute('data-avatar');
+          
+          // Actualizar DOM
+          avatarBotImg.src = '/images/icons/' + avatar;
+          nombreBot.textContent = nombre;
+          eloBot.textContent = elo;
+          
+          // Generar barra de ELO
+          generarBarraElo(min, max, step, elo);
+          currentElo = elo;
+          
+          verificarActivacion();
+        });
+      });
+      
+      // Seleccionar ficha
+      botonesFicha.forEach(btn => {
+        btn.addEventListener('click', function() {
+          botonesFicha.forEach(b => b.classList.remove('selected'));
+          this.classList.add('selected');
+          fichaSeleccionada = this.getAttribute('data-ficha');
+          verificarActivacion();
+        });
+      });
+      
+      // Verificar activación del botón Jugar
+      function verificarActivacion() {
+        if (dificultadSeleccionada && fichaSeleccionada) {
+          btnJugar.classList.add('activo');
+          btnJugar.style.cursor = 'pointer';
+          const url = `/jugar/partida?bot=${dificultadSeleccionada}&color=${fichaSeleccionada}&elo=${currentElo}`;
+          btnJugar.href = url;
+        } else {
+          btnJugar.classList.remove('activo');
+          btnJugar.style.cursor = 'not-allowed';
+          btnJugar.href = 'javascript:void(0);';
+        }
+      }
+      
+      // Prevenir click en botón inactivo
+      btnJugar.addEventListener('click', function(e) {
+        if (!this.classList.contains('activo')) {
+          e.preventDefault();
+        }
+      });
+      
+      // Seleccionar principiante por defecto
+      botonesDificultad[0].click();
+    })();
+  </script>
 </section>
 
 </html>

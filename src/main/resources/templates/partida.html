@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Partida de Ajedrez - Chess UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/partida.css}" href="/css/partida.css">
+</head>
+
+<section th:fragment="content" class="pagina-partida">
+    
+    <!-- Fondo de madera -->
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+        <img th:src="@{/images/wood-bg.jpg}" src="/images/wood-bg.jpg" alt="Fondo" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+    <div class="partida-container">
+        
+        <!-- Panel Izquierdo - VACÍO (sin barras de ELO) -->
+        <div class="panel-lateral panel-izquierdo">
+            <!-- Eliminado: barras de ELO de bot y usuario -->
+        </div>
+        
+        <!-- Tablero Central con Coordenadas -->
+        <div class="tablero-central">
+            <div class="tablero-wrapper-con-coordenadas">
+                
+                <!-- Fila superior con letras A-H -->
+                <div class="coordenadas-superior">
+                    <div class="esquina-vacia"></div>
+                    <div class="letras-fila">
+                        <span>A</span><span>B</span><span>C</span><span>D</span>
+                        <span>E</span><span>F</span><span>G</span><span>H</span>
+                    </div>
+                    <div class="esquina-vacia"></div>
+                </div>
+                
+                <!-- Área central: números + tablero -->
+                <div class="area-central-tablero">
+                    <!-- Números columna izquierda (8-1) -->
+                    <div class="numeros-columna izquierda">
+                        <span>8</span><span>7</span><span>6</span><span>5</span>
+                        <span>4</span><span>3</span><span>2</span><span>1</span>
+                    </div>
+                    
+                    <!-- Tablero -->
+                    <div class="tablero-ajedrez" id="tableroAjedrez">
+                        <!-- Las casillas se generarán con JavaScript -->
+                    </div>
+                    
+                    <!-- Números columna derecha (8-1) -->
+                    <div class="numeros-columna derecha">
+                        <span>8</span><span>7</span><span>6</span><span>5</span>
+                        <span>4</span><span>3</span><span>2</span><span>1</span>
+                    </div>
+                </div>
+                
+                <!-- Fila inferior con letras A-H -->
+                <div class="coordenadas-inferior">
+                    <div class="esquina-vacia"></div>
+                    <div class="letras-fila">
+                        <span>A</span><span>B</span><span>C</span><span>D</span>
+                        <span>E</span><span>F</span><span>G</span><span>H</span>
+                    </div>
+                    <div class="esquina-vacia"></div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Barra de Evaluación (estilo Chess.com) - A LA DERECHA DEL TABLERO -->
+        <div class="barra-evaluacion-chess" id="barraEvaluacion">
+            <div class="numeros-evaluacion">
+                <span class="numero-superior">+0.0</span>
+                <span class="numero-inferior">-0.0</span>
+            </div>
+            <div class="barra-vertical">
+                <div class="indicador-posicion" style="top: 50%;"></div>
+            </div>
+        </div>
+        
+        <!-- Panel Lateral Derecho - Controles -->
+        <div class="panel-lateral panel-derecho">
+            <div class="perfiles-container">
+                <!-- Perfil Bot (Arriba) -->
+                <div class="perfil perfil-bot">
+                    <div class="avatar">
+                        <img th:src="@{/images/icons/icono-bot-principiante.svg}" alt="Bot" id="avatarBot">
+                    </div>
+                    <div class="info-perfil">
+                        <h3 id="nombreBotPartida" th:text="${nombreBot != null ? nombreBot : 'Ricardo'}">Ricardo</h3>
+                        <p class="elo-perfil">Elo: <span id="eloBotPartida" th:text="${elo != null ? elo : '500'}">500</span></p>
+                    </div>
+                </div>
+                
+                <!-- Temporizador DESHABILITADO -->
+                <div class="temporizador" style="display: none;">
+                    <span class="tiempo" id="tiempoPartida">00:00</span>
+                </div>
+                
+                <!-- Perfil Usuario (Abajo) -->
+                <div class="perfil perfil-usuario">
+                    <div class="avatar">
+                        <img th:src="@{/images/icons/icono-usuario.svg}" alt="Usuario" id="avatarUsuario">
+                    </div>
+                    <div class="info-perfil">
+                        <h3 id="nombreUsuario">Diego A</h3>
+                        <p class="elo-perfil">Elo: <span id="eloUsuario">1350</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles de la Partida -->
+            <div class="controles-partida">
+                <button class="btn-control" id="btnRetroceder" title="Retroceder jugada">
+                    <img th:src="@{/images/icons/controles/icono-retroceder.svg}" alt="Retroceder">
+                </button>
+                <button class="btn-control" id="btnAvanzar" title="Avanzar jugada">
+                    <img th:src="@{/images/icons/controles/icono-avanzar.svg}" alt="Avanzar">
+                </button>
+                <button class="btn-control btn-abandonar" id="btnAbandonar" title="Abandonar partida">
+                    <img th:src="@{/images/icons/controles/icono-abandonar-partida.svg}" alt="Abandonar">
+                    <span>Abandonar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Confirmación para Abandonar -->
+    <div class="modal-abandonar" id="modalAbandonar">
+        <div class="modal-contenido">
+            <h3>¿Abandonar partida?</h3>
+            <p>¿Estás seguro de que deseas abandonar la partida?</p>
+            <div class="modal-botones">
+                <button class="btn-modal btn-cancelar">Cancelar</button>
+                <button class="btn-modal btn-confirmar">Abandonar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pasar parámetros a JavaScript -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        window.botConfig = {
+            bot: /*[[${bot}]]*/ 'principiante',
+            color: /*[[${color}]]*/ 'blanca',
+            elo: /*[[${elo}]]*/ '500',
+            nombre: /*[[${nombreBot}]]*/ 'Ricardo'
+        };
+        /*]]>*/
+    </script>
+    <script th:src="@{/js/partida.js}"></script>
+</section>
+
+</html>

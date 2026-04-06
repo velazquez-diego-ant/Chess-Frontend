@@ -1,0 +1,734 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.pagina-partida {
+    background-image: url('/images/wood-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Alexandria', sans-serif;
+    padding: 20px;
+    position: relative;
+}
+
+/* Capa de oscurecimiento opcional para mejor legibilidad */
+body.pagina-partida::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.partida-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    max-width: 1400px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+/* Paneles Laterales - SIN fondo oscuro */
+.panel-lateral {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.panel-izquierdo {
+    width: 60px;
+    min-width: 60px;
+}
+
+.panel-derecho {
+    width: 280px;
+}
+
+/* Barras de ELO (Lado Izquierdo) - SIN fondo oscuro */
+.barra-jugador {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.barra-jugador .nombre-jugador {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFF1EA;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.barra-elo-jugador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.barra-fondo {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.barra-progreso {
+    height: 100%;
+    background: linear-gradient(90deg, #ffd700, #ffb347);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.barra-jugador .elo-valor {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffd700;
+    min-width: 45px;
+}
+
+.barra-blanca .barra-progreso {
+    background: linear-gradient(90deg, #FFF1EA, #ffffff);
+}
+
+.barra-negra .barra-progreso {
+    background: linear-gradient(90deg, #007968, #00a88f);
+}
+
+/* Tablero Central - SIN círculo café */
+.tablero-central {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tablero-wrapper {
+    background: linear-gradient(145deg, #5a3a2a, #3a2518);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.tablero-ajedrez {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 560px;
+    height: 560px;
+    background-color: #FFF1EA;
+    border: 2px solid #4a2e2a;
+    box-shadow: 0 0 0 2px #d4af7a;
+}
+
+/* Casillas del Tablero con los nuevos colores */
+.casilla {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.casilla:hover {
+    filter: brightness(0.95);
+}
+
+/* NUEVOS COLORES DEL TABLERO */
+.casilla.clara {
+    background-color: #FFF1EA;
+}
+
+.casilla.oscura {
+    background-color: #007968;
+}
+
+.casilla.seleccionada {
+    background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0.4) 100%);
+    box-shadow: inset 0 0 0 3px #ffd700;
+}
+
+.casilla.movimiento-posible {
+    position: relative;
+}
+
+.casilla.movimiento-posible::after {
+    content: '';
+    position: absolute;
+    width: 25%;
+    height: 25%;
+    background: radial-gradient(circle, rgba(0,255,0,0.6), rgba(0,255,0,0.2));
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.casilla.movimiento-posible.captura::after {
+    background: radial-gradient(circle, rgba(255,0,0,0.6), rgba(255,0,0,0.2));
+    border-radius: 0;
+    width: 80%;
+    height: 80%;
+}
+
+/* Piezas de Ajedrez */
+.pieza {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+    transition: transform 0.2s ease;
+}
+
+.casilla:hover .pieza {
+    transform: scale(1.05);
+}
+
+/* Perfiles (Lado Derecho) - SIN fondo oscuro pesado */
+.perfiles-container {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    transition: transform 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.perfil:hover {
+    transform: translateX(-5px);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #007968, #004d3d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffd700;
+}
+
+.avatar img {
+    width: 100%;
+    height: 126%;
+    object-fit: cover;
+}
+
+.info-perfil {
+    flex: 1;
+}
+
+.info-perfil h3 {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFF1EA;
+    margin-bottom: 4px;
+}
+
+.info-perfil .elo-perfil {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.info-perfil .elo-perfil span {
+    color: #ffd700;
+    font-weight: 700;
+}
+
+/* Temporizador */
+.temporizador {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.tiempo {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffd700;
+    letter-spacing: 2px;
+}
+
+/* Controles de Partida */
+.controles-partida {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-control {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Alexandria', sans-serif;
+    font-weight: 600;
+    color: #FFF1EA;
+}
+
+.btn-control:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.btn-control:active {
+    transform: translateY(0);
+}
+
+.btn-control img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.btn-abandonar {
+    background: rgba(139, 0, 0, 0.6);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+.btn-abandonar:hover {
+    background: rgba(139, 0, 0, 0.9);
+    border-color: rgba(255, 0, 0, 0.6);
+}
+
+.btn-abandonar span {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFF1EA;
+}
+
+/* Modal de Abandonar */
+.modal-abandonar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-abandonar.active {
+    display: flex;
+}
+
+.modal-contenido {
+    background: linear-gradient(135deg, #2a241f, #1e1915);
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-contenido h3 {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffd700;
+    margin-bottom: 16px;
+}
+
+.modal-contenido p {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 24px;
+}
+
+.modal-botones {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.btn-modal {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Alexandria', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancelar {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFF1EA;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-cancelar:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-confirmar {
+    background: #8b0000;
+    color: #FFF1EA;
+}
+
+.btn-confirmar:hover {
+    background: #a00000;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .partida-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .panel-izquierdo {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .panel-derecho {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .tablero-ajedrez {
+        width: 480px;
+        height: 480px;
+    }
+}
+
+@media (max-width: 640px) {
+    .tablero-ajedrez {
+        width: 360px;
+        height: 360px;
+    }
+    
+    .avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .info-perfil h3 {
+        font-size: 16px;
+    }
+    
+    .btn-control {
+        padding: 10px;
+    }
+}
+
+/* ===== TABLERO CON COORDENADAS ===== */
+.tablero-wrapper-con-coordenadas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #DCD9D4; /* Color solicitado para columnas */
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Filas de coordenadas (letras) */
+.coordenadas-superior,
+.coordenadas-inferior {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: #DCD9D4;
+}
+
+.esquina-vacia {
+    width: 30px;
+    height: 25px;
+    background: #DCD9D4;
+}
+
+.letras-fila {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+    height: 25px;
+    background: #DCD9D4;
+}
+
+.letras-fila span {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #007968; /* Color solicitado */
+    width: 60px;
+    text-align: center;
+}
+
+/* Área central */
+.area-central-tablero {
+    display: flex;
+    align-items: stretch;
+}
+
+
+/* Columnas de números */
+.numeros-columna {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    align-items: center;
+    background: #DCD9D4;
+}
+
+.numeros-columna span {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #007968; /* Color solicitado */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Ajustar tamaño del tablero para que coincida con coordenadas */
+.tablero-ajedrez {
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+    width: 480px;
+    height: 480px;
+    background-color: #FFF1EA;
+    border: none; /* Sin borde café */
+    box-shadow: none;
+}
+
+.casilla {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.casilla.clara {
+    background-color: #FFF1EA;
+}
+
+.casilla.oscura {
+    background-color: #007968;
+}
+
+.barra-evaluacion-chess {
+    width: 40px;
+    height: 480px; /* Mismo alto que el tablero */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.numeros-evaluacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    z-index: 10;
+}
+
+.numeros-evaluacion span {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.numero-superior {
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.numero-inferior {
+    color: #fff;
+    margin-top: 4px;
+}
+
+/* ===== BARRA DE EVALUACIÓN DE MOVIMIENTO ===== */
+.barra-vertical {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(to bottom, 
+        #fff 0%,    /* Arriba: blanco (ventaja blancas) */
+        #fff 50%,   /* Centro */
+        #000 50%,   /* Centro */
+        #000 100%   /* Abajo: negro (ventaja negras) */
+    );
+    transition: background 0.3s ease;
+}
+
+.barra-evaluacion-chess.jugador-blancas .barra-vertical {
+    background: linear-gradient(to bottom, 
+        #fff 0%,
+        #fff 50%,
+        #333 50%,
+        #333 100%
+    );
+}
+
+/* Cuando juegas con negras - barra negra arriba */
+.barra-evaluacion-chess.jugador-negras .barra-vertical {
+    background: linear-gradient(to top, 
+        #000 0%,
+        #000 50%,
+        #333 50%,
+        #333 100%
+    );
+}
+
+.indicador-posicion {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #ffd700;
+    border-radius: 2px;
+    transform: translateY(-50%);
+    transition: top 0.5s ease;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+/* Responsive para coordenadas */
+@media (max-width: 1024px) {
+    .partida-container {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .panel-izquierdo {
+        display: none; /* Ocultar en móvil */
+    }
+    
+    .barra-evaluacion-chess {
+        height: 400px;
+    }
+    
+    .tablero-ajedrez {
+        grid-template-columns: repeat(8, 50px);
+        grid-template-rows: repeat(8, 50px);
+        width: 400px;
+        height: 400px;
+    }
+    
+    .casilla {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .letras-fila span {
+        width: 50px;
+    }
+    
+    .numeros-columna span {
+        height: 50px;
+    }
+}
+
+@media (max-width: 640px) {
+    .barra-evaluacion-chess {
+        height: 320px;
+        width: 30px;
+    }
+    
+    .tablero-ajedrez {
+        grid-template-columns: repeat(8, 40px);
+        grid-template-rows: repeat(8, 40px);
+        width: 320px;
+        height: 320px;
+    }
+    
+    .casilla {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .letras-fila span {
+        width: 40px;
+        font-size: 12px;
+    }
+    
+    .numeros-columna span {
+        height: 40px;
+        font-size: 12px;
+    }
+    
+    .numeros-evaluacion span {
+        font-size: 9px;
+    }
+}
+

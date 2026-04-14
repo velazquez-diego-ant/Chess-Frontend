@@ -16,68 +16,81 @@
     
     <div class="partida-container">
         
-        <!-- Panel Izquierdo - VACÍO (sin barras de ELO) -->
+        <!-- Panel Izquierdo - Vacío -->
         <div class="panel-lateral panel-izquierdo">
-            <!-- Eliminado: barras de ELO de bot y usuario -->
         </div>
         
-        <!-- Tablero Central con Coordenadas -->
-        <div class="tablero-central">
-            <div class="tablero-wrapper-con-coordenadas">
-                
-                <!-- Fila superior con letras A-H -->
-                <div class="coordenadas-superior">
-                    <div class="esquina-vacia"></div>
-                    <div class="letras-fila">
-                        <span>A</span><span>B</span><span>C</span><span>D</span>
-                        <span>E</span><span>F</span><span>G</span><span>H</span>
-                    </div>
-                    <div class="esquina-vacia"></div>
-                </div>
-                
-                <!-- Área central: números + tablero -->
-                <div class="area-central-tablero">
-                    <!-- Números columna izquierda (8-1) -->
-                    <div class="numeros-columna izquierda">
-                        <span>8</span><span>7</span><span>6</span><span>5</span>
-                        <span>4</span><span>3</span><span>2</span><span>1</span>
-                    </div>
-                    
-                    <!-- Tablero -->
-                    <div class="tablero-ajedrez" id="tableroAjedrez">
-                        <!-- Las casillas se generarán con JavaScript -->
-                    </div>
-                    
-                    <!-- Números columna derecha (8-1) -->
-                    <div class="numeros-columna derecha">
-                        <span>8</span><span>7</span><span>6</span><span>5</span>
-                        <span>4</span><span>3</span><span>2</span><span>1</span>
-                    </div>
-                </div>
-                
-                <!-- Fila inferior con letras A-H -->
-                <div class="coordenadas-inferior">
-                    <div class="esquina-vacia"></div>
-                    <div class="letras-fila">
-                        <span>A</span><span>B</span><span>C</span><span>D</span>
-                        <span>E</span><span>F</span><span>G</span><span>H</span>
-                    </div>
-                    <div class="esquina-vacia"></div>
-                </div>
-                
+        <!-- Área Central: Piezas capturadas + Tablero -->
+        <div class="area-juego-central">
+            
+            <!-- Piezas capturadas por el jugador (negras capturadas por blancas) -->
+            <div class="piezas-capturadas capturadas-superior" id="piezasCapturadasSuperior">
+                <!-- Aquí van las piezas negras capturadas -->
             </div>
+            
+            <!-- Tablero Central con Coordenadas -->
+            <div class="tablero-central">
+                <div class="tablero-wrapper-con-coordenadas">
+                    
+                    <!-- Fila superior con letras A-H -->
+                    <div class="coordenadas-superior">
+                        <div class="esquina-vacia"></div>
+                        <div class="letras-fila">
+                            <span>A</span><span>B</span><span>C</span><span>D</span>
+                            <span>E</span><span>F</span><span>G</span><span>H</span>
+                        </div>
+                        <div class="esquina-vacia"></div>
+                    </div>
+                    
+                    <!-- Área central: números + tablero -->
+                    <div class="area-central-tablero">
+                        <!-- Números columna izquierda (8-1) -->
+                        <div class="numeros-columna izquierda">
+                            <span>8</span><span>7</span><span>6</span><span>5</span>
+                            <span>4</span><span>3</span><span>2</span><span>1</span>
+                        </div>
+                        
+                        <!-- Tablero -->
+                        <div class="tablero-ajedrez" id="tableroAjedrez">
+                            <!-- Las casillas se generarán con JavaScript -->
+                        </div>
+                        
+                        <!-- Números columna derecha (8-1) -->
+                        <div class="numeros-columna derecha">
+                            <span>8</span><span>7</span><span>6</span><span>5</span>
+                            <span>4</span><span>3</span><span>2</span><span>1</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Fila inferior con letras A-H -->
+                    <div class="coordenadas-inferior">
+                        <div class="esquina-vacia"></div>
+                        <div class="letras-fila">
+                            <span>A</span><span>B</span><span>C</span><span>D</span>
+                            <span>E</span><span>F</span><span>G</span><span>H</span>
+                        </div>
+                        <div class="esquina-vacia"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Piezas capturadas por el bot (blancas capturadas por negras) -->
+            <div class="piezas-capturadas capturadas-inferior" id="piezasCapturadasInferior">
+                <!-- Aquí van las piezas blancas capturadas -->
+            </div>
+            
         </div>
 
-        <!-- Barra de Evaluación (estilo Chess.com) - A LA DERECHA DEL TABLERO -->
         <div class="barra-evaluacion-chess" id="barraEvaluacion">
             <div class="numeros-evaluacion">
                 <span class="numero-superior">+0.0</span>
                 <span class="numero-inferior">-0.0</span>
             </div>
-            <div class="barra-vertical">
-                <div class="indicador-posicion" style="top: 50%;"></div>
-            </div>
+        <div class="barra-vertical">
+            <div class="indicador-posicion" style="top: 50%;"></div>
         </div>
+    </div>
         
         <!-- Panel Lateral Derecho - Controles -->
         <div class="panel-lateral panel-derecho">
@@ -133,7 +146,7 @@
             <p>¿Estás seguro de que deseas abandonar la partida?</p>
             <div class="modal-botones">
                 <button class="btn-modal btn-cancelar">Cancelar</button>
-                <button class="btn-modal btn-confirmar">Abandonar</button>
+                <button class="btn-modal btn-confirmar" onclick="window.location.href='/jugar/bots'">Abandonar</button>
             </div>
         </div>
     </div>

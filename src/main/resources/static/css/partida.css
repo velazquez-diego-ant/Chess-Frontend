@@ -37,13 +37,42 @@ body.pagina-partida::before {
 .partida-container {
     display: flex;
     gap: 20px;
-    align-items: center;
+    align-items: flex-start; /* Cambiado de center a flex-start para mover abajo */
     justify-content: center;
     max-width: 1400px;
     width: 100%;
     position: relative;
     z-index: 1;
-    padding: 20px;
+    padding: 40px 20px 20px; /* Más padding arriba para bajar todo */
+    margin-top: -7px; /* Mover todo el contenido más abajo */
+}
+
+.area-juego-central {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.piezas-capturadas {
+    width: 100%;
+    max-width: 480px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    min-height: 50px;
+}
+
+.piezas-capturadas img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
 }
 
 /* Paneles Laterales - SIN fondo oscuro */
@@ -52,6 +81,7 @@ body.pagina-partida::before {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 65px;
 }
 
 .panel-izquierdo {
@@ -583,7 +613,7 @@ body.pagina-partida::before {
 
 .barra-evaluacion-chess {
     width: 40px;
-    height: 480px; /* Mismo alto que el tablero */
+    height: 480px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -591,6 +621,7 @@ body.pagina-partida::before {
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    margin-top: 96px;
 }
 
 .numeros-evaluacion {
@@ -609,12 +640,12 @@ body.pagina-partida::before {
 }
 
 .numero-superior {
-    color: #fff;
+    color: #ffffff !important;
     margin-bottom: 4px;
 }
 
 .numero-inferior {
-    color: #fff;
+    color: #000000 !important;
     margin-top: 4px;
 }
 
@@ -624,31 +655,12 @@ body.pagina-partida::before {
     width: 100%;
     position: relative;
     background: linear-gradient(to bottom, 
-        #fff 0%,    /* Arriba: blanco (ventaja blancas) */
-        #fff 50%,   /* Centro */
-        #000 50%,   /* Centro */
-        #000 100%   /* Abajo: negro (ventaja negras) */
-    );
-    transition: background 0.3s ease;
-}
-
-.barra-evaluacion-chess.jugador-blancas .barra-vertical {
-    background: linear-gradient(to bottom, 
-        #fff 0%,
-        #fff 50%,
-        #333 50%,
-        #333 100%
-    );
-}
-
-/* Cuando juegas con negras - barra negra arriba */
-.barra-evaluacion-chess.jugador-negras .barra-vertical {
-    background: linear-gradient(to top, 
-        #000 0%,
-        #000 50%,
-        #333 50%,
-        #333 100%
-    );
+        #ffffff 0%, 
+        #ffffff 50%, 
+        #000000 50%, 
+        #000000 100%
+    ) !important;
+    transition: none !important;
 }
 
 .indicador-posicion {
@@ -656,11 +668,12 @@ body.pagina-partida::before {
     left: 0;
     right: 0;
     height: 4px;
-    background: #ffd700;
+    background: #ffd700 !important;
     border-radius: 2px;
     transform: translateY(-50%);
     transition: top 0.5s ease;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    top: 50% !important;
 }
 
 /* Responsive para coordenadas */

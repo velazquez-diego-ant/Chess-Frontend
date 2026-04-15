@@ -1,5 +1,5 @@
 services:
-  app:
+  chess_frontend:
     build:
       context: .
       dockerfile: Dockerfile
@@ -7,13 +7,15 @@ services:
     ports:
       - "8081:8080"
     volumes:
-      - ./src:/app/src
-      - ./target:/app/target 
+      - ./src:/app/src:cached 
+      - ./pom.xml:/app/pom.xml:cached
       - maven-repo:/root/.m2  
     environment:
       - SPRING_DEVTOOLS_RESTART_ENABLED=true
       - SPRING_DEVTOOLS_LIVERELOAD_ENABLED=true
-    restart: unless-stopped
+      - SPRING_OUTPUT_ANSI_ENABLED=always
+    stdin_open: true
+    tty: true
 
 volumes:
   maven-repo:

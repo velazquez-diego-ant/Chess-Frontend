@@ -142,47 +142,55 @@
         numerosDerecha.forEach((span, index) => { if (index < 8) span.textContent = numerosUsar[index]; });
     }
     
-// ========== CONFIGURAR BARRA DE EVALUACIÓN (FIJA Y SIMPLE) ==========
-    function configurarBarraEvaluacion() {
-        const barraVertical = document.querySelector('.barra-vertical');
-        const numeroSuperior = document.querySelector('.numero-superior');
-        const numeroInferior = document.querySelector('.numero-inferior');
-        const indicador = document.querySelector('.indicador-posicion');
+function configurarBarraEvaluacion() {
+    const barraVertical = document.querySelector('.barra-vertical');
+    const numeroSuperior = document.querySelector('.numero-superior');
+    const numeroInferior = document.querySelector('.numero-inferior');
+    const indicador = document.querySelector('.indicador-posicion');
 
-        if (!barraVertical) {
-            console.error('No se encontró la barra de evaluación');
-            return;
-        }
-
-        // VALORES FIJOS - NO DEPENDEN DEL COLOR DEL JUGADOR
-        if (numeroSuperior) {
-            numeroSuperior.textContent = '+0.0';
-            numeroSuperior.style.color = '#ffffff';
-        }
-
-        if (numeroInferior) {
+    if (!barraVertical) {
+        console.error('No se encontró la barra de evaluación');
         return;
     }
-    
-    // VALORES FIJOS - NO DEPENDEN DEL COLOR DEL JUGADOR
-    if (numeroSuperior) {
-        numeroSuperior.textContent = '+0.0';
-        numeroSuperior.style.color = '#ffffff';
-    }
-    
-    if (numeroInferior) {
-        numeroInferior.textContent = '-0.0';
-        numeroInferior.style.color = '#000000';
+
+    // Limpiar clases anteriores
+    barraVertical.classList.remove('blancas-abajo', 'negras-abajo');
+
+    if (colorJugador === 'blanca') {
+        // JUGADOR BLANCAS: barra blanca ABAJO, negra ARRIBA
+        barraVertical.classList.add('blancas-abajo');
+        
+        if (numeroSuperior) {
+            numeroSuperior.textContent = '-0.0';  // Negro arriba
+            numeroSuperior.style.color = '#000000';
+        }
+        
+        if (numeroInferior) {
+            numeroInferior.textContent = '+0.0';  // Blanco abajo
+            numeroInferior.style.color = '#ffffff';
+        }
+        
+    } else {
+        // JUGADOR NEGRAS: barra negra ABAJO, blanca ARRIBA
+        barraVertical.classList.add('negras-abajo');
+        
+        if (numeroSuperior) {
+            numeroSuperior.textContent = '+0.0';  // Blanco arriba
+            numeroSuperior.style.color = '#ffffff';
+        }
+        
+        if (numeroInferior) {
+            numeroInferior.textContent = '-0.0';  // Negro abajo
+            numeroInferior.style.color = '#000000';
+        }
     }
     
     if (indicador) {
         indicador.style.top = '50%';
     }
     
-    // NO aplicar clases ni estilos dinámicos
-    console.log('✅ Barra de evaluación configurada: FIJA (Blanco arriba, Negro abajo)');
-}
-    
+    console.log('✅ Barra configurada para:', colorJugador);
+} 
     // ========== ACTUALIZAR INFO DE JUGADORES ==========
     function actualizarInfoJugadores() {
         const nombreUsuario = document.getElementById('nombreUsuario');

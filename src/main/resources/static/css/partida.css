@@ -654,13 +654,26 @@ body.pagina-partida::before {
     flex: 1;
     width: 100%;
     position: relative;
+    transition: none;
+}
+
+
+.barra-vertical.blancas-abajo {
     background: linear-gradient(to bottom, 
-        #ffffff 0%, 
-        #ffffff 50%, 
+        #000000 0%,      /* Arriba: negro (bot) */
         #000000 50%, 
+        #ffffff 50%,     /* Abajo: blanco (jugador) */
+        #ffffff 100%
+    );
+}
+
+.barra-vertical.negras-abajo {
+    background: linear-gradient(to bottom, 
+        #ffffff 0%,      /* Arriba: blanco (bot) */
+        #ffffff 50%, 
+        #000000 50%,     /* Abajo: negro (jugador) */
         #000000 100%
-    ) !important;
-    transition: none !important;
+    );
 }
 
 .indicador-posicion {
@@ -668,12 +681,12 @@ body.pagina-partida::before {
     left: 0;
     right: 0;
     height: 4px;
-    background: #ffd700 !important;
+    background: #ffd700;
     border-radius: 2px;
     transform: translateY(-50%);
     transition: top 0.5s ease;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
-    top: 50% !important;
+    top: 50%;
 }
 
 /* Responsive para coordenadas */

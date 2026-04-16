@@ -1,9 +1,7 @@
-// partida.js - Barra de evaluación FIJA: BLANCO arriba, NEGRO abajo SIEMPRE
 
 (function() {
     'use strict';
     
-    // ========== CONFIGURACIÓN INICIAL ==========
     const config = window.botConfig || { 
         bot: 'principiante', 
         color: 'blanca', 
@@ -11,7 +9,6 @@
         nombre: 'Ricardo' 
     };
     
-    // Determinar color si es aleatorio
     const colorJugador = config.color === 'aleatoria' 
         ? (Math.random() < 0.5 ? 'blanca' : 'negra') 
         : config.color;
@@ -20,16 +17,14 @@
     console.log('Color jugador:', colorJugador);
     console.log('Color bot:', colorBot);
     
-    // ========== MAPEO DE ICONOS DE PIEZAS ==========
     const ICONOS_PIEZAS = {
-        // Piezas blancas
         'peon-blanco': '/images/icons/piezas/icono-peon-blanco.svg',
         'torre-blanca': '/images/icons/piezas/icono-torre-blanca.svg',
         'caballo-blanco': '/images/icons/piezas/icono-caballo-blanco.svg',
         'alfil-blanco': '/images/icons/piezas/icono-alfil-blanco.svg',
         'reina-blanca': '/images/icons/piezas/icono-dama-blanca.svg',
         'rey-blanco': '/images/icons/piezas/icono-rey-blanco.svg',
-        // Piezas negras
+
         'peon-negro': '/images/icons/piezas/icono-peon-negro.svg',
         'torre-negra': '/images/icons/piezas/icono-torre-negra.svg',
         'caballo-negro': '/images/icons/piezas/icono-caballo-negro.svg',
@@ -38,7 +33,6 @@
         'rey-negro': '/images/icons/piezas/icono-rey-negro.svg'
     };
     
-    // ========== MAPEO DE AVATARES DE BOTS ==========
     const AVATARES_BOTS = {
         'principiante': '/images/icons/icono-bot-principiante.svg',
         'intermedio': '/images/icons/icono-bot-intermedio.svg',
@@ -46,10 +40,8 @@
         'maestro': '/images/icons/icono-bot-maestro.svg'
     };
     
-    // ========== AVATAR DE USUARIO ==========
     const AVATAR_USUARIO = '/images/icons/icono-usuario.svg';
     
-    // ========== INICIALIZACIÓN DEL TABLERO (SOLO VISUAL) ==========
     function inicializarTablero() {
         const tableroElement = document.getElementById('tableroAjedrez');
         if (!tableroElement) {
@@ -59,10 +51,9 @@
         
         tableroElement.innerHTML = '';
         
-        // Configurar orientación según color del jugador
         const filas = colorJugador === 'blanca' 
-            ? [8, 7, 6, 5, 4, 3, 2, 1]  // Blancas abajo, negras arriba
-            : [1, 2, 3, 4, 5, 6, 7, 8]; // Negras abajo, blancas arriba
+            ? [8, 7, 6, 5, 4, 3, 2, 1]  
+            : [1, 2, 3, 4, 5, 6, 7, 8]; 
         
         const columnas = colorJugador === 'blanca' 
             ? ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
@@ -110,17 +101,11 @@
             }
         }
         
-        // Configurar barra de evaluación (FIJA: blanco arriba, negro abajo)
         configurarBarraEvaluacion();
-        
-        // Actualizar información de jugadores
         actualizarInfoJugadores();
-        
-        // Actualizar coordenadas
         actualizarCoordenadas();
     }
     
-    // ========== ACTUALIZAR COORDENADAS ==========
     function actualizarCoordenadas() {
         const letrasFilas = document.querySelectorAll('.letras-fila span');
         const letrasNormales = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -153,34 +138,31 @@ function configurarBarraEvaluacion() {
         return;
     }
 
-    // Limpiar clases anteriores
     barraVertical.classList.remove('blancas-abajo', 'negras-abajo');
 
     if (colorJugador === 'blanca') {
-        // JUGADOR BLANCAS: barra blanca ABAJO, negra ARRIBA
         barraVertical.classList.add('blancas-abajo');
         
         if (numeroSuperior) {
-            numeroSuperior.textContent = '-0.0';  // Negro arriba
+            numeroSuperior.textContent = '-0.0';  
             numeroSuperior.style.color = '#000000';
         }
         
         if (numeroInferior) {
-            numeroInferior.textContent = '+0.0';  // Blanco abajo
+            numeroInferior.textContent = '+0.0'; 
             numeroInferior.style.color = '#ffffff';
         }
         
     } else {
-        // JUGADOR NEGRAS: barra negra ABAJO, blanca ARRIBA
         barraVertical.classList.add('negras-abajo');
         
         if (numeroSuperior) {
-            numeroSuperior.textContent = '+0.0';  // Blanco arriba
+            numeroSuperior.textContent = '+0.0'; 
             numeroSuperior.style.color = '#ffffff';
         }
         
         if (numeroInferior) {
-            numeroInferior.textContent = '-0.0';  // Negro abajo
+            numeroInferior.textContent = '-0.0'; 
             numeroInferior.style.color = '#000000';
         }
     }
@@ -191,7 +173,6 @@ function configurarBarraEvaluacion() {
     
     console.log('✅ Barra configurada para:', colorJugador);
 } 
-    // ========== ACTUALIZAR INFO DE JUGADORES ==========
     function actualizarInfoJugadores() {
         const nombreUsuario = document.getElementById('nombreUsuario');
         const eloUsuario = document.getElementById('eloUsuario');
@@ -229,7 +210,6 @@ function configurarBarraEvaluacion() {
         }
     }
     
-    // ========== MODAL DE ABANDONO ==========
     function inicializarModalAbandono() {
         const btnAbandonar = document.getElementById('btnAbandonar');
         const modal = document.getElementById('modalAbandonar');
@@ -242,13 +222,11 @@ function configurarBarraEvaluacion() {
         modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
     }
     
-    // ========== CONTROLES (SOLO VISUAL) ==========
     function inicializarControles() {
         document.getElementById('btnRetroceder')?.addEventListener('click', () => console.log('Retroceder'));
         document.getElementById('btnAvanzar')?.addEventListener('click', () => console.log('Avanzar'));
     }
     
-    // ========== INICIALIZACIÓN PRINCIPAL ==========
     document.addEventListener('DOMContentLoaded', () => {
         console.log('Inicializando partida...');
         inicializarTablero();

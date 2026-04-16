@@ -16,7 +16,6 @@
   
   <div class="bots-layout">
     
-    <!-- Tablero de Ajedrez (IZQUIERDA) -->
     <div class="tablero-wrapper">
       <div class="tablero-ajedrez" aria-label="Tablero de ajedrez">
         <img th:src="@{/images/tablero-ajedrez-jugar.svg}" 
@@ -27,10 +26,8 @@
       </div>
     </div>
 
-    <!-- Panel de Dificultad (DERECHA) -->
     <div class="panel-dificultad">
       
-      <!-- PERFIL DEL BOT SELECCIONADO -->
       <div class="perfil-bot" id="perfilBot">
         <div class="avatar-bot">
           <img id="avatarBotImg" th:src="@{/images/icons/icono-bot-principiante.svg}" 
@@ -41,7 +38,6 @@
           <h3 id="nombreBot">Ricardo</h3>
           <p class="elo-bot">Elo: <span id="eloBot">500</span></p>
           
-          <!-- Barra de ELO -->
           <div class="barra-elo-container">
             <div class="barra-elo" id="barraElo">
               <div class="marcadores-elo" id="marcadoresElo"></div>
@@ -56,7 +52,6 @@
         </div>
       </div>
 
-      <!-- Opciones de Dificultad -->
       <div class="opciones-dificultad" id="dificultadOpciones">
         
         <button class="btn-dificultad" data-dificultad="principiante" 
@@ -109,7 +104,6 @@
 
       </div>
 
-      <!-- Selección de Fichas -->
       <div class="seccion-fichas">
         <div class="titulo-fichas">Selecciona tu color</div>
         
@@ -151,7 +145,6 @@
         </div>
       </div>
 
-      <!-- Botón Jugar - CORREGIDO -->
       <div class="contenedor-jugar">
         <button class="btn-jugar" id="btnJugar">
           <img th:src="@{/images/icons/icono-corona.svg}" src="/images/icons/icono-corona.svg" alt="">
@@ -162,7 +155,6 @@
     </div>
   </div>
 
-  <!-- Script con funcionalidad de arrastre y redirección -->
   <script>
     (function() {
       let dificultadSeleccionada = null;
@@ -350,7 +342,6 @@
         });
 });
       
-      // Función para verificar activación y redirigir
       function verificarActivacion() {
         if (dificultadSeleccionada && fichaSeleccionada) {
           btnJugar.classList.add('activo');
@@ -361,10 +352,8 @@
         }
       }
       
-// Redirigir al hacer click en el botón
     btnJugar.addEventListener('click', function() {
     if (this.classList.contains('activo') && !this.disabled) {
-        // Construir URL para redirigir usando la ruta de Spring MVC
         let url = `/partida/bots?bot=${dificultadSeleccionada}&color=${fichaSeleccionada}&elo=${currentElo}`;
         
         const btnSeleccionado = document.querySelector('.btn-dificultad.selected');
@@ -378,7 +367,6 @@
     }
 });
       
-      // Seleccionar principiante por defecto
       botonesDificultad[0].click();
     })();
   </script>

@@ -4,9 +4,7 @@
 
 <head>
   <title>Jugar - Chess UI</title>
-  <!-- Fuente Alexandria -->
   <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- CSS específico de jugar -->
   <link rel="stylesheet" th:href="@{/css/jugar.css}" href="/css/jugar.css">
 </head>
 
@@ -14,7 +12,6 @@
   
   <div class="jugar-layout">
     
-    <!-- Tablero de Ajedrez (IZQUIERDA) -->
     <div class="tablero-wrapper">
       <div class="tablero-jugar" aria-label="Tablero de ajedrez">
         <img th:src="@{/images/tablero-ajedrez-jugar.svg}" 
@@ -25,10 +22,8 @@
       </div>
     </div>
 
-    <!-- Panel de Opciones (DERECHA) - CONTENEDOR CON FONDO -->
     <div class="panel-opciones" id="panelOpciones">
       
-      <!-- Jugar contra Bots -->
       <a th:href="@{/jugar/bots}" href="/jugar/bots" class="btn-opcion" data-opcion="bots">
         <span class="btn-icono">
           <img th:src="@{/images/icons/icono-bot.svg}" 
@@ -40,7 +35,6 @@
         <span>Jugar contra Bots</span>
       </a>
 
-      <!-- Jugar con un Maestro -->
       <a th:href="@{/jugar/maestro}" href="/jugar/maestro" class="btn-opcion" data-opcion="maestro">
         <span class="btn-icono">
           <img th:src="@{/images/icons/icono-maestro.svg}" 
@@ -52,7 +46,6 @@
         <span>Jugar con un Maestro</span>
       </a>
 
-      <!-- Jugar con un Amigo -->
       <a th:href="@{/jugar/amigo}" href="/jugar/amigo" class="btn-opcion" data-opcion="amigo">
         <span class="btn-icono">
           <img th:src="@{/images/icons/icono-amigo.svg}" 
@@ -67,7 +60,6 @@
     </div>
   </div>
 
-  <!-- Script para efecto de opacidad -->
   <script>
     (function() {
       const panel = document.getElementById('panelOpciones');

@@ -21,7 +21,6 @@ body.pagina-partida {
     position: relative;
 }
 
-/* Capa de oscurecimiento opcional para mejor legibilidad */
 body.pagina-partida::before {
     content: '';
     position: fixed;
@@ -37,14 +36,14 @@ body.pagina-partida::before {
 .partida-container {
     display: flex;
     gap: 20px;
-    align-items: flex-start; /* Cambiado de center a flex-start para mover abajo */
+    align-items: flex-start; 
     justify-content: center;
     max-width: 1400px;
     width: 100%;
     position: relative;
     z-index: 1;
-    padding: 40px 20px 20px; /* Más padding arriba para bajar todo */
-    margin-top: -7px; /* Mover todo el contenido más abajo */
+    padding: 40px 20px 20px;
+    margin-top: -7px; 
 }
 
 .area-juego-central {
@@ -75,7 +74,6 @@ body.pagina-partida::before {
     filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
 }
 
-/* Paneles Laterales - SIN fondo oscuro */
 .panel-lateral {
     flex: 0 0 auto;
     display: flex;
@@ -93,7 +91,6 @@ body.pagina-partida::before {
     width: 280px;
 }
 
-/* Barras de ELO (Lado Izquierdo) - SIN fondo oscuro */
 .barra-jugador {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 16px;
@@ -149,7 +146,6 @@ body.pagina-partida::before {
     background: linear-gradient(90deg, #007968, #00a88f);
 }
 
-/* Tablero Central - SIN círculo café */
 .tablero-central {
     display: flex;
     justify-content: center;
@@ -174,7 +170,6 @@ body.pagina-partida::before {
     box-shadow: 0 0 0 2px #d4af7a;
 }
 
-/* Casillas del Tablero con los nuevos colores */
 .casilla {
     aspect-ratio: 1 / 1;
     display: flex;
@@ -189,7 +184,6 @@ body.pagina-partida::before {
     filter: brightness(0.95);
 }
 
-/* NUEVOS COLORES DEL TABLERO */
 .casilla.clara {
     background-color: #FFF1EA;
 }
@@ -224,7 +218,6 @@ body.pagina-partida::before {
     height: 80%;
 }
 
-/* Piezas de Ajedrez */
 .pieza {
     width: 80%;
     height: 80%;
@@ -239,7 +232,6 @@ body.pagina-partida::before {
     transform: scale(1.05);
 }
 
-/* Perfiles (Lado Derecho) - SIN fondo oscuro pesado */
 .perfiles-container {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 20px;
@@ -309,7 +301,6 @@ body.pagina-partida::before {
     font-weight: 700;
 }
 
-/* Temporizador */
 .temporizador {
     text-align: center;
     padding: 15px;
@@ -326,7 +317,6 @@ body.pagina-partida::before {
     letter-spacing: 2px;
 }
 
-/* Controles de Partida */
 .controles-partida {
     display: flex;
     gap: 12px;
@@ -383,7 +373,6 @@ body.pagina-partida::before {
     color: #FFF1EA;
 }
 
-/* Modal de Abandonar */
 .modal-abandonar {
     display: none;
     position: fixed;
@@ -466,7 +455,6 @@ body.pagina-partida::before {
     transform: translateY(-2px);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .partida-container {
         flex-direction: column;
@@ -510,18 +498,16 @@ body.pagina-partida::before {
     }
 }
 
-/* ===== TABLERO CON COORDENADAS ===== */
 .tablero-wrapper-con-coordenadas {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #DCD9D4; /* Color solicitado para columnas */
+    background: #DCD9D4; 
     padding: 8px;
     border-radius: 4px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* Filas de coordenadas (letras) */
 .coordenadas-superior,
 .coordenadas-inferior {
     display: flex;
@@ -550,19 +536,17 @@ body.pagina-partida::before {
     font-family: 'Alexandria', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    color: #007968; /* Color solicitado */
+    color: #007968; 
     width: 60px;
     text-align: center;
 }
 
-/* Área central */
 .area-central-tablero {
     display: flex;
     align-items: stretch;
 }
 
 
-/* Columnas de números */
 .numeros-columna {
     display: flex;
     flex-direction: column;
@@ -576,13 +560,13 @@ body.pagina-partida::before {
     font-family: 'Alexandria', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    color: #007968; /* Color solicitado */
+    color: #007968; 
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-/* Ajustar tamaño del tablero para que coincida con coordenadas */
+
 .tablero-ajedrez {
     display: grid;
     grid-template-columns: repeat(8, 60px);
@@ -590,7 +574,7 @@ body.pagina-partida::before {
     width: 480px;
     height: 480px;
     background-color: #FFF1EA;
-    border: none; /* Sin borde café */
+    border: none; 
     box-shadow: none;
 }
 
@@ -649,7 +633,6 @@ body.pagina-partida::before {
     margin-top: 4px;
 }
 
-/* ===== BARRA DE EVALUACIÓN DE MOVIMIENTO ===== */
 .barra-vertical {
     flex: 1;
     width: 100%;
@@ -660,18 +643,18 @@ body.pagina-partida::before {
 
 .barra-vertical.blancas-abajo {
     background: linear-gradient(to bottom, 
-        #000000 0%,      /* Arriba: negro (bot) */
+        #000000 0%,      
         #000000 50%, 
-        #ffffff 50%,     /* Abajo: blanco (jugador) */
+        #ffffff 50%,     
         #ffffff 100%
     );
 }
 
 .barra-vertical.negras-abajo {
     background: linear-gradient(to bottom, 
-        #ffffff 0%,      /* Arriba: blanco (bot) */
+        #ffffff 0%,     
         #ffffff 50%, 
-        #000000 50%,     /* Abajo: negro (jugador) */
+        #000000 50%,    
         #000000 100%
     );
 }
@@ -689,7 +672,6 @@ body.pagina-partida::before {
     top: 50%;
 }
 
-/* Responsive para coordenadas */
 @media (max-width: 1024px) {
     .partida-container {
         flex-wrap: wrap;
@@ -697,7 +679,7 @@ body.pagina-partida::before {
     }
     
     .panel-izquierdo {
-        display: none; /* Ocultar en móvil */
+        display: none;
     }
     
     .barra-evaluacion-chess {

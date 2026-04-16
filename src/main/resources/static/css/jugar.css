@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap');
 
-/* ===== RESET Y BASE ===== */
 .jugar-page {
   width: 100%;
   min-height: 100%;
 }
 
-/* ===== LAYOUT PRINCIPAL ===== */
 .jugar-layout {
   display: flex;
   flex-direction: row;
@@ -17,7 +15,6 @@
   width: 100%;
 }
 
-/* ===== TABLERO (IZQUIERDA) ===== */
 .tablero-wrapper {
   flex: 1;
   display: flex;
@@ -26,7 +23,6 @@
   max-width: 560px;
 }
 
-/* Tablero - NO ARRASTRABLE, NO SELECCIONABLE */
 .tablero-jugar {
   width: 100%;
   max-width: 520px;
@@ -52,15 +48,12 @@
   -khtml-user-drag: none !important;
   -moz-user-drag: none !important;
   -o-user-drag: none !important;
-  user-drag: none !important;
-  draggable: false;
 }
 
-/* ===== PANEL DE OPCIONES (DERECHA) ===== */
 .panel-opciones {
   width: 340px;
   min-width: 340px;
-  background: rgba(53, 39, 33, 0.6); /* #352721 al 60% */
+  background: rgba(53, 39, 33, 0.6); 
   border-radius: 16px;
   padding: 28px;
   display: flex;
@@ -72,15 +65,14 @@
   box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
-/* ===== BOTONES ===== */
 .btn-opcion {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 18px 20px;
-  background: rgba(89, 78, 72, 0.5); /* #594E48 al 50% */
+  background: rgba(89, 78, 72, 0.5);
   border: 2px solid transparent;
-  border-radius: 10px; /* Radio 10px */
+  border-radius: 10px; 
   color: #fff;
   font-family: 'Alexandria', sans-serif;
   font-size: 16px;
@@ -92,21 +84,19 @@
   width: 100%;
 }
 
-/* Hover - 100% opacidad */
+
 .btn-opcion:hover {
-  background: rgba(89, 78, 72, 1); /* 100% */
+  background: rgba(89, 78, 72, 1); 
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   border-color: rgba(255,255,255,0.1);
 }
 
-/* Active/Click */
 .btn-opcion:active {
   transform: translateY(0);
   background: rgba(74, 65, 60, 1);
 }
 
-/* ===== ICONOS ===== */
 .btn-icono {
   width: 26px;
   height: 26px;
@@ -123,10 +113,8 @@
   filter: brightness(0) invert(1);
   pointer-events: none;
   -webkit-user-drag: none;
-  user-drag: none;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .jugar-layout {
     flex-direction: column;

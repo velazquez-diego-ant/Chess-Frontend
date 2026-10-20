@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(content)">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title th:text="${title} ?: 'KING.COM'">KING.COM</title>
+
+  <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css" />
+  <link rel="stylesheet" th:href="@{/css/jugar.css}" href="/css/jugar.css" />
+  <link rel="stylesheet" th:href="@{/css/bots.css}" href="/css/bots.css" />
+
+  <script defer src="js/ui.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-logo">
+            <img src="/images/logo-king.svg" alt="KING.COM" width="120" height="40" draggable="false">
+          </div>
+        </div>
+      </div>
+
+      <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    </aside>
+
+    <main class="content">
+      <div class="page">
+        <th:block th:replace="${content}"></th:block>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

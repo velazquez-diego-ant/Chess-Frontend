@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::content})}">
+
+<head>
+  <title>Jugar vs Bots - Chess UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{css/bots.css}" href="css/bots.css">
+</head>
+
+<section th:fragment="content" class="bots-page">
+  
+  <script>
+    document.body.classList.add('pagina-bots');
+  </script>
+  
+  <div class="bots-layout">
+    
+    <div class="tablero-wrapper">
+      <div class="tablero-ajedrez" aria-label="Tablero de ajedrez">
+        <img th:src="@{images/tablero-ajedrez-jugar.svg}" 
+             src="images/tablero-ajedrez-jugar.svg" 
+             alt="Tablero de ajedrez con piezas"
+             draggable="false"
+             ondragstart="return false;">
+      </div>
+    </div>
+
+    <div class="panel-dificultad">
+      
+      <div class="perfil-bot" id="perfilBot">
+        <div class="avatar-bot">
+          <img id="avatarBotImg" th:src="@{images/icons/icono-bot-principiante.svg}" 
+               src="images/icons/icono-bot-principiante.svg" 
+               alt="Bot">
+        </div>
+        <div class="info-bot">
+          <h3 id="nombreBot">Ricardo</h3>
+          <p class="elo-bot">Elo: <span id="eloBot">500</span></p>
+          
+          <div class="barra-elo-container">
+            <div class="barra-elo" id="barraElo">
+              <div class="marcadores-elo" id="marcadoresElo"></div>
+              <div class="indicador-elo" id="indicadorElo"></div>
+              <div class="corona-victoria" id="coronaVictoria">
+                <img th:src="@{images/icons/icono-corona-oro.svg}" 
+                     src="images/icons/icono-corona-oro.svg" 
+                     alt="Victoria">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="opciones-dificultad" id="dificultadOpciones">
+        
+        <button class="btn-dificultad" data-dificultad="principiante" 
+                data-nombre="Ricardo" data-elo="500" 
+                data-min="500" data-max="1000" data-step="100"
+                data-avatar="icono-bot-principiante.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{images/icons/icono-bot-principiante.svg}" 
+                 src="images/icons/icono-bot-principiante.svg" 
+                 alt="Principiante" draggable="false">
+          </span>
+          <span>Principiante</span>
+        </button>
+
+        <button class="btn-dificultad" data-dificultad="intermedio" 
+                data-nombre="Carlos" data-elo="1100"
+                data-min="1100" data-max="1600" data-step="100"
+                data-avatar="icono-bot-intermedio.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{images/icons/icono-bot-intermedio.svg}" 
+                 src="images/icons/icono-bot-intermedio.svg" 
+                 alt="Intermedio" draggable="false">
+          </span>
+          <span>Intermedio</span>
+        </button>
+
+        <button class="btn-dificultad" data-dificultad="avanzado" 
+                data-nombre="Ana" data-elo="1700"
+                data-min="1700" data-max="2200" data-step="100"
+                data-avatar="icono-bot-avanzado.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{images/icons/icono-bot-avanzado.svg}" 
+                 src="images/icons/icono-bot-avanzado.svg" 
+                 alt="Avanzado" draggable="false">
+          </span>
+          <span>Avanzado</span>
+        </button>
+
+        <button class="btn-dificultad" data-dificultad="maestro" 
+                data-nombre="Víctor" data-elo="2300"
+                data-min="2300" data-max="3300" data-step="200"
+                data-avatar="icono-bot-maestro.svg">
+          <span class="icono-dificultad">
+            <img th:src="@{images/icons/icono-bot-maestro.svg}" 
+                 src="images/icons/icono-bot-maestro.svg" 
+                 alt="Maestro" draggable="false">
+          </span>
+          <span>Maestro</span>
+        </button>
+
+      </div>
+
+      <div class="seccion-fichas">
+        <div class="titulo-fichas">Selecciona tu color</div>
+        
+        <div class="opciones-fichas" id="fichaOpciones">
+          
+          <button class="btn-ficha" data-ficha="blanca" title="Blancas">
+            <img class="icono-normal" 
+                 th:src="@{images/icons/icono-ficha-blanca.svg}" 
+                 src="images/icons/icono-ficha-blanca.svg" 
+                 alt="Blancas" draggable="false">
+            <img class="icono-activo" 
+                 th:src="@{images/icons/icono-ficha-blanca-activa.svg}" 
+                 src="images/icons/icono-ficha-blanca-activa.svg" 
+                 alt="Blancas" draggable="false">
+          </button>
+
+          <button class="btn-ficha" data-ficha="aleatoria" title="Aleatorio">
+            <img class="icono-normal" 
+                 th:src="@{images/icons/icono-ficha-aleatoria.svg}" 
+                 src="images/icons/icono-ficha-aleatoria.svg" 
+                 alt="Aleatorio" draggable="false">
+            <img class="icono-activo" 
+                 th:src="@{images/icons/icono-ficha-aleatoria-activa.svg}" 
+                 src="images/icons/icono-ficha-aleatoria-activa.svg" 
+                 alt="Aleatorio" draggable="false">
+          </button>
+
+          <button class="btn-ficha" data-ficha="negra" title="Negras">
+            <img class="icono-normal" 
+                 th:src="@{/images/icons/icono-ficha-negra.svg}" 
+                 src="images/icons/icono-ficha-negra.svg" 
+                 alt="Negras" draggable="false">
+            <img class="icono-activo" 
+                 th:src="@{images/icons/icono-ficha-negra-activa.svg}" 
+                 src="images/icons/icono-ficha-negra-activa.svg" 
+                 alt="Negras" draggable="false">
+          </button>
+
+        </div>
+      </div>
+
+      <div class="contenedor-jugar">
+        <button class="btn-jugar" id="btnJugar">
+          <img th:src="@{images/icons/icono-corona.svg}" src="images/icons/icono-corona.svg" alt="">
+          <span>Jugar</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+   <script src="js/bots.js"></script>
+</section>
+
+</html>

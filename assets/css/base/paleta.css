@@ -1,0 +1,46 @@
+/* Paleta oficial de PawnShare  */
+:root {
+  --ir-verde-bosque: #09251c;
+  --ir-marron-gris: #3b3030;
+  --ir-cafe: #493628;
+  --ir-vino: #541a1a;
+  --ir-ladrillo: #60241e;
+  --ir-terracota: #b77466;
+  --ir-beige: #d6c0b3;
+  --ir-durazno: #f1e2d1;
+  --ir-fondo: #e4e0e1;
+  --color-blanco: #ffffff;
+
+  --ir-verde-bosque-hover: color-mix(
+    in srgb,
+    var(--ir-verde-bosque) 37%,
+    white
+  );
+  --ir-marron-gris-hover: color-mix(in srgb, var(--ir-marron-gris) 63%, white);
+  --ir-cafe-hover: color-mix(in srgb, var(--ir-cafe) 63%, white);
+  --ir-ladrillo-hover: color-mix(in srgb, var(--ir-ladrillo) 63%, white);
+  --ir-vino-hover: color-mix(in srgb, var(--ir-vino) 63%, white);
+  --ir-terracota-hover: color-mix(in srgb, var(--ir-terracota) 63%, white);
+  --ir-durazno-hover: color-mix(in srgb, var(--ir-durazno) 63%, white);
+  --ir-fondo-hover: color-mix(in srgb, var(--ir-fondo) 63%, white);
+}
+
+/* Botones de Bootstrap con la paleta */
+.btn-success {
+  --bs-btn-bg: var(--ir-verde);
+  --bs-btn-border-color: var(--ir-verde);
+  --bs-btn-hover-bg: var(--ir-verde-oscuro);
+  --bs-btn-hover-border-color: var(--ir-verde-oscuro);
+  --bs-btn-active-bg: var(--ir-verde-oscuro);
+  --bs-btn-active-border-color: var(--ir-verde-oscuro);
+}
+
+.btn-outline-success {
+  --bs-btn-color: var(--ir-verde-oscuro);
+  --bs-btn-border-color: var(--ir-verde);
+  --bs-btn-hover-bg: var(--ir-verde);
+  --bs-btn-hover-border-color: var(--ir-verde);
+  --bs-btn-hover-color: var(--ir-blanco);
+  --bs-btn-active-bg: var(--ir-verde-oscuro);
+  --bs-btn-active-border-color: var(--ir-verde-oscuro);
+}

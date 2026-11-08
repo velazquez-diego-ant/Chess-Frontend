@@ -153,12 +153,19 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 3;
-  transition: opacity 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
   opacity: 0.7;
 }
 
 .toggle-password:hover {
   opacity: 1;
+}
+
+.toggle-password:active {
+  opacity: 1;
+  transform: translateY(-50%) scale(0.9);
 }
 
 .toggle-icon {

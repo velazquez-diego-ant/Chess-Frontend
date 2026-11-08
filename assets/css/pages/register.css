@@ -1,0 +1,402 @@
+/* =========================================
+   ESTILOS GENERALES 
+   ========================================= */
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--ir-fondo);
+  font-family: "Onest", sans-serif;
+  color: var(--ir-marron-gris);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   HEADER 
+   ========================================= */
+.header-pawnshare {
+  background-color: var(--ir-beige);
+  width: 100%;
+  height: 70px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
+.main-registro {
+  flex-grow: 1;
+  width: 100%;
+  background-image: url("/assets/img/img-register.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 2rem 0;
+}
+
+/* =========================================
+   ESTILOS RESPONSIVE PARA TEXTOS
+   ========================================= */
+.texto-titulo {
+  color: var(--color-blanco);
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+
+.texto-subtitulo {
+  color: var(--color-blanco);
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  max-width: 100%;
+  text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  margin: 0 auto 2rem auto;
+}
+
+/* =========================================
+   CONTENEDOR Y CAJA DEL FORMULARIO
+   ========================================= */
+.contenedor-formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caja-formulario {
+  background-color: rgba(241, 226, 209, 0.9);
+  max-width: 517px;
+  width: 100%;
+  min-height: 825px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* =========================================
+   LOGO
+   ========================================= */
+.logo-contenedor {
+  position: relative;
+  margin-top: -15px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo-img {
+  height: 90px;
+  width: auto;
+  margin-left: 0px;
+}
+
+/* =========================================
+   FORMULARIO Y LABELS
+   ========================================= */
+.formulario-registro {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form-label {
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ir-vino);
+  opacity: 0.7;
+  margin-bottom: 0.4rem;
+  transition: opacity 0.3s ease;
+}
+
+/* =========================================
+   INPUTS PERSONALIZADOS (FONDO BLANCO SÓLIDO)
+   ========================================= */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-blanco) !important;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.custom-input {
+  font-family: "Onest", sans-serif;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 15px 13px 45px;
+  background-color: transparent !important;
+
+  color: rgba(84, 26, 26, 0.6) !important;
+  -webkit-text-fill-color: rgba(84, 26, 26, 0.6) !important;
+
+  transition: color 0.3s ease;
+  width: 100%;
+}
+
+.custom-input::placeholder {
+  color: rgba(84, 26, 26, 0.6) !important;
+  font-family: "Onest", sans-serif;
+}
+
+/* Fecha (dd/mm/aaaa) */
+input[type="date"].custom-input {
+  color: rgba(84, 26, 26, 0.6) !important;
+  -webkit-text-fill-color: rgba(84, 26, 26, 0.6) !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+/* Padding extra a la derecha para los inputs que tienen el ojo */
+#pass,
+#confirm-pass {
+  padding-right: 45px;
+}
+
+/* =========================================
+   ESTADOS DE INTERACCIÓN (CLICK/FOCUS)
+   ========================================= */
+
+/* 1. Quitar el borde azul nativo de Bootstrap */
+.custom-input:focus,
+input[type="date"].custom-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 2. Aplicar la sombra al contenedor cuando el input tiene foco */
+.input-wrapper:focus-within {
+  box-shadow: 0 6px 18px rgba(64, 81, 59, 0.2);
+}
+
+/* 3. Cambiar color del texto cuando el input tiene foco */
+.input-wrapper:focus-within .custom-input,
+.input-wrapper:focus-within input[type="date"].custom-input {
+  color: var(--ir-vino) !important;
+  -webkit-text-fill-color: var(--ir-vino) !important;
+}
+
+.input-wrapper:focus-within .custom-input::placeholder {
+  color: var(--ir-vino) !important;
+}
+
+/* 4. Iluminar SOLO el icono de la izquierda al hacer foco en el input */
+.input-wrapper:focus-within .input-icon {
+  opacity: 1;
+}
+
+/* =========================================
+   TOGGLE PASSWORD (OJO) - EFECTO EXCLUSIVO
+   ========================================= */
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
+  opacity: 0.6; /* Opacidad base tenue, NO se altera al tocar el input */
+}
+
+/* Efecto SOLO cuando el mouse pasa por encima del ojo */
+.toggle-password:hover {
+  opacity: 1;
+}
+
+/* Efecto SOLO cuando se hace clic en el ojo */
+.toggle-password:active {
+  opacity: 1;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.toggle-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* =========================================
+   REQUISITOS DE CONTRASEÑA
+   ========================================= */
+.requisitos-contenedor {
+  font-family: "Onest", sans-serif;
+}
+
+.requisitos-titulo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ir-vino);
+  margin-bottom: 0.8rem;
+}
+
+.lista-requisitos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-requisitos li {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ir-vino);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.lista-requisitos li:hover {
+  opacity: 1;
+}
+
+.circulo {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--ir-fondo);
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   BOTÓN
+   ========================================= */
+.btn-registro {
+  background-color: var(--ir-terracota);
+  color: var(--color-blanco);
+  font-family: "Onest", sans-serif;
+  font-weight: 400 !important;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 15px;
+  width: 75%;
+  padding: 0.8rem 1rem;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn-registro:hover {
+  background-color: var(--ir-terracota-hover);
+  color: var(--color-blanco);
+  transform: scale(1.02);
+}
+
+.btn-registro:active {
+  background-color: var(--ir-terracota);
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.texto-footer-form {
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  color: var(--ir-vino);
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.link-login {
+  color: var(--ir-terracota);
+  opacity: 0.7;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.link-login:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+/* =========================================
+   MEDIA QUERIES (Responsividad)
+   ========================================= */
+@media (min-width: 768px) {
+  .texto-titulo {
+    font-size: 4.5rem;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  .texto-subtitulo {
+    font-size: 1.25rem;
+    max-width: 90%;
+    text-align: left;
+    margin: 0;
+  }
+  .contenedor-formulario {
+    justify-content: flex-end;
+    padding-right: 3rem;
+  }
+}
+
+@media (max-height: 900px) {
+  .caja-formulario {
+    min-height: auto;
+    height: auto;
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .caja-formulario {
+    padding: 25px 20px;
+  }
+  .logo-img {
+    height: 70px;
+  }
+  .custom-btn,
+  .btn-registro {
+    width: 100%;
+  }
+}

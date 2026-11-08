@@ -3,9 +3,20 @@
    ========================================= */
 html,
 body {
-  min-height: 100vh;
+  min-height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: clip;
+}
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
@@ -14,9 +25,8 @@ body {
   color: var(--ir-marron-gris);
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  min-height: 100vh;
 }
-
 /* =========================================
    HEADER 
    ========================================= */
@@ -34,13 +44,51 @@ body {
    ========================================= */
 .main-registro {
   flex-grow: 1;
-  width: 100%;
+  width: 100%; /* NO uses 100vw aquí */
   background-image: url("/assets/img/img-register.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
   padding: 2rem 0;
+  overflow-x: clip;
+  overflow-y: auto;
+}
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* =========================================
+   CUSTOM SCROLLBAR 
+   ========================================= */
+
+/* 1. Ancho de la barra (delgada pero visible) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* 2. El fondo por donde se desliza */
+::-webkit-scrollbar-track {
+  background: var(--ir-durazno);
+}
+
+/* 3. La barrita que se mueve (Terracota para que contraste) */
+::-webkit-scrollbar-thumb {
+  background: var(--ir-terracota); 
+  border-radius: 10px;
+  border: 2px solid var(--ir-durazno); 
+}
+
+/* 4. Efecto Hover cuando el usuario toca la barra */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ir-vino); /* Se vuelve más oscuro al interactuar */
+}
+
+/* 5. Soporte para Firefox (que no usa webkit) */
+.main-registro {
+  scrollbar-color: var(--ir-terracota) var(--ir-durazno);
+  scrollbar-width: thin; 
 }
 
 /* =========================================

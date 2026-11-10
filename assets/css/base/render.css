@@ -1,6 +1,6 @@
 /* =========================================
-   HEADER  & FOOTER PAWNSHARE 
-   ========================================= */
+  * HEADER  & FOOTER PAWNSHARE 
+  ========================================= */
 
 /* 1. Navbar Base */
 .navbar-custom {
@@ -9,6 +9,10 @@
   padding-bottom: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-family: "Onest", sans-serif;
+}
+
+.navbar-collapse {
+  align-items: center;
 }
 
 .logo {
@@ -25,7 +29,7 @@
   padding-bottom: 8px;
   position: relative;
 
-  /* LA SOLUCIÓN: Ancho mínimo fijo para todos los enlaces */
+  /* Mantenemos el ancho mínimo para que el cambio a bold no los mueva */
   min-width: 130px;
   text-align: center;
   display: inline-block;
@@ -44,7 +48,8 @@
   background-color: var(--ir-vino);
   border-radius: 10px;
   transition: width 0.3s ease;
-  max-width: 80px; /* Ajusta este valor si la quieres más larga o corta */
+
+  max-width: 80px;
 }
 
 /* HOVER: Texto blanco y línea vino */
@@ -110,8 +115,163 @@
   border-color: var(--ir-terracota);
   color: var(--color-blanco);
 }
+/* =========================================
+   * PERFIL DE USUARIO (LOGGED IN)
+   ========================================= */
+.profile-dropdown-container {
+  position: relative;
+}
 
-/* 5. Responsividad HEADER */
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50px;
+  transition: background-color 0.2s ease;
+}
+
+.profile-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.profile-name {
+  font-family: "Onest", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ir-vino);
+}
+
+.profile-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--ir-terracota);
+}
+
+.profile-arrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.profile-btn[aria-expanded="true"] .profile-arrow {
+  transform: rotate(180deg);
+}
+
+/* =========================================
+   * MENÚ DESPLEGABLE 
+   ========================================= */
+.profile-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: var(--color-blanco);
+  min-width: 200px;
+  border-radius: 16px; /* Bordes más redondeados según tu imagen */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  /* SOLUCIÓN CLAVE 1: Oculta el fondo que se escapa */
+  overflow: hidden;
+
+  /* SOLUCIÓN CLAVE 2: Quitamos el padding del contenedor */
+  padding: 0;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+
+.profile-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Los ítems del menú */
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px; /* El padding ahora va aquí, no en el contenedor */
+  text-decoration: none;
+  color: var(--ir-marron-gris);
+  font-family: "Onest", sans-serif;
+  font-size: 1.05rem;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  box-sizing: border-box; /* Evita que el padding lo haga más ancho */
+}
+
+/* Hover: Fondo beige que cubre todo el ítem */
+.profile-menu-item:hover {
+  background-color: var(--ir-durazno);
+  color: var(--ir-vino);
+}
+
+/* Estilo especial para Cerrar Sesión (Separador y color) */
+.profile-menu-item[data-cerrar-sesion] {
+  color: var(--ir-ladrillo);
+  font-weight: 500;
+  border-top: 1px solid var(--ir-durazno);
+}
+
+.profile-menu-item[data-cerrar-sesion]:hover {
+  background-color: rgba(96, 36, 30, 0.1);
+  color: var(--ir-ladrillo);
+}
+
+/* =========================================
+   * CONTENEDOR DE AUTENTICACIÓN 
+   ========================================= */
+#auth-container {
+  /* Ancho fijo que nunca cambia */
+  width: 320px;
+  min-width: 320px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin: 0;
+}
+
+/* =========================================
+   * BANDERA DE IDIOMA (HEADER)
+   ========================================= */
+.header-flag-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 8px;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.header-flag-link:hover {
+  transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.header-flag-icon {
+  height: 30px;
+  width: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* * 5. Responsividad HEADER */
 @media (max-width: 991px) {
   .navbar-custom {
     padding: 10px 15px;
@@ -144,7 +304,7 @@
 }
 
 /* =========================================
-   FOOTER PAWNSHARE
+   * FOOTER PAWNSHARE
    ========================================= */
 .footer-pawnshare {
   background-color: var(--ir-beige);
@@ -170,7 +330,7 @@
   margin: 0;
 }
 
-/* 6. Responsividad FOOTER */
+/* * 6. Responsividad FOOTER */
 
 @media (max-width: 576px) {
   .footer-pawnshare {

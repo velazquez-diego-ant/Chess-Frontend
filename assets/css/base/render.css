@@ -1,0 +1,185 @@
+/* =========================================
+   HEADER  & FOOTER PAWNSHARE 
+   ========================================= */
+
+/* 1. Navbar Base */
+.navbar-custom {
+  background-color: var(--ir-beige);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Onest", sans-serif;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+}
+
+/* 2. Enlaces Centrales */
+.navbar-custom .nav-link {
+  font-family: "Onest", sans-serif;
+  color: var(--ir-vino);
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 8px;
+  position: relative;
+
+  /* LA SOLUCIÓN: Ancho mínimo fijo para todos los enlaces */
+  min-width: 130px;
+  text-align: center;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+/* LA LÍNEA INFERIOR */
+.navbar-custom .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 4px;
+  background-color: var(--ir-vino);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  max-width: 80px; /* Ajusta este valor si la quieres más larga o corta */
+}
+
+/* HOVER: Texto blanco y línea vino */
+.navbar-custom .nav-link:hover {
+  color: var(--color-blanco);
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+}
+
+/* ACTIVE: Solo negrita, sin línea */
+.navbar-custom .nav-link.active {
+  color: var(--ir-vino);
+  font-weight: 700;
+}
+
+.navbar-custom .nav-link.active::after {
+  width: 0%;
+}
+
+/* 3. Botón Iniciar Sesión */
+.btn-iniciar {
+  font-family: "Onest", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: transparent;
+  color: var(--ir-vino);
+  padding: 10px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+  border: 1.5px solid var(--ir-terracota);
+  white-space: nowrap;
+}
+
+.btn-iniciar:hover {
+  background-color: var(--ir-terracota);
+  color: var(--color-blanco);
+  border-color: var(--ir-terracota);
+}
+
+/* 4. Botón Registrarse */
+.btn-registrar {
+  font-family: "Onest", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: var(--ir-terracota-hover);
+  color: var(--color-blanco);
+  padding: 10px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid var(--ir-terracota-hover);
+  white-space: nowrap;
+}
+
+.btn-registrar:hover {
+  background-color: var(--ir-terracota);
+  border-color: var(--ir-terracota);
+  color: var(--color-blanco);
+}
+
+/* 5. Responsividad HEADER */
+@media (max-width: 991px) {
+  .navbar-custom {
+    padding: 10px 15px;
+  }
+
+  .logo {
+    height: 45px;
+  }
+
+  .navbar-custom .nav-link {
+    min-width: auto;
+    text-align: left;
+    padding: 8px 0;
+  }
+
+  .navbar-custom .nav-link::after {
+    display: none;
+  }
+
+  .navbar-custom .nav-link:hover {
+    color: var(--ir-vino);
+  }
+
+  .btn-iniciar,
+  .btn-registrar {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* =========================================
+   FOOTER PAWNSHARE
+   ========================================= */
+.footer-pawnshare {
+  background-color: var(--ir-beige);
+  padding: 40px 20px;
+  text-align: center;
+  font-family: "Onest", sans-serif;
+  margin-top: auto;
+}
+
+.footer-frase {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ir-marron-gris);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--ir-marron-gris);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* 6. Responsividad FOOTER */
+
+@media (max-width: 576px) {
+  .footer-pawnshare {
+    padding: 30px 15px;
+  }
+  .footer-frase {
+    font-size: 1rem;
+  }
+  .footer-copyright {
+    font-size: 0.85rem;
+  }
+}

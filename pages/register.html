@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar PawnShare</title>
 
-    <!-- Bootstrap 5 CSS -->
+    <!--TODO: Bootstrap 5 CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
 
-    <!-- Google Fonts: Onest -->
+    <!--TODO: Flatpickr CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+
+    <!--TODO: Google Fonts: Onest -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,21 +25,21 @@
       rel="stylesheet"
     />
 
-    <!-- CSS personalizado -->
+    <!--TODO: CSS personalizado -->
     <link rel="stylesheet" href="../assets/css/base/paleta.css" />
     <link rel="stylesheet" href="../assets/css/pages/register.css" />
   </head>
 
   <body>
-    <!-- HEADER -->
+    <!--TODO: HEADER -->
     <header class="header-pawnshare"></header>
 
-    <!-- CONTENEDOR PRINCIPAL -->
+    <!--* CONTENEDOR PRINCIPAL -->
     <main class="main-registro">
       <!-- Grid de Bootstrap -->
       <div class="container-fluid h-100">
         <div class="row h-100 align-items-center">
-          <!-- LADO IZQUIERDO: Textos (Responsive) -->
+          <!--* LADO IZQUIERDO: Textos -->
           <div
             class="col-12 col-md-7 col-lg-6 ps-4 ps-md-5 mb-4 mb-md-0 text-center text-md-start"
           >
@@ -45,7 +51,7 @@
             </p>
           </div>
 
-          <!-- LADO DERECHO: Formulario -->
+          <!--* LADO DERECHO: Formulario -->
           <div class="col-12 col-md-5 col-lg-6 contenedor-formulario">
             <!-- La caja con el fondo -->
             <div class="caja-formulario w-100">
@@ -58,8 +64,11 @@
                 />
               </div>
 
-              <!-- FORMULARIO -->
+              <!--* FORMULARIO -->
               <form class="formulario-registro">
+
+                  <!--  Contenedor para las alertas de Bootstrap -->
+                <div id="alert-container" class="mb-3"></div>
                 <!-- Campo: Nombre -->
                 <div class="mb-3">
                   <label for="nombre" class="form-label"
@@ -111,10 +120,12 @@
                       alt="calendar"
                       class="input-icon"
                     />
+                    <!-- El input con el id "fecha" -->
                     <input
                       type="date"
                       class="form-control custom-input w-100"
                       id="fecha"
+                      placeholder="dd/mm/aaaa"
                     />
                   </div>
                 </div>
@@ -173,18 +184,20 @@
                   </div>
                 </div>
 
-                <!-- Requisitos -->
+                <!--* Requisitos -->
                 <div class="requisitos-contenedor mb-4">
                   <h3 class="requisitos-titulo">Requisitos de contraseña:</h3>
                   <ul class="lista-requisitos">
-                    <li>
+                    <li id="req-mayuscula">
                       <span class="circulo"></span> Una letra mayúscula (A-Z)
                     </li>
-                    <li>
+                    <li id="req-minuscula">
                       <span class="circulo"></span> Una letra minúscula (a-z)
                     </li>
-                    <li><span class="circulo"></span> Un número (0-9)</li>
-                    <li>
+                    <li id="req-numero">
+                      <span class="circulo"></span> Un número (0-9)
+                    </li>
+                    <li id="req-especial">
                       <span class="circulo"></span> Un carácter especial
                       (!@#$%&*)
                     </li>
@@ -210,7 +223,10 @@
       </div>
     </main>
 
-    <!-- Bootstrap 5 JS -->
+    <!--TODO: Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    <!--TODO: Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../assets/js/pages/register.js"></script>
   </body>

@@ -28,15 +28,12 @@
   font-weight: 500;
   padding-bottom: 8px;
   position: relative;
-
-  /* Mantenemos el ancho mínimo para que el cambio a bold no los mueva */
   min-width: 130px;
   text-align: center;
   display: inline-block;
   transition: color 0.3s ease;
 }
 
-/* LA LÍNEA INFERIOR */
 .navbar-custom .nav-link::after {
   content: "";
   position: absolute;
@@ -48,11 +45,9 @@
   background-color: var(--ir-vino);
   border-radius: 10px;
   transition: width 0.3s ease;
-
   max-width: 80px;
 }
 
-/* HOVER: Texto blanco y línea vino */
 .navbar-custom .nav-link:hover {
   color: var(--color-blanco);
 }
@@ -61,7 +56,6 @@
   width: 100%;
 }
 
-/* ACTIVE: Solo negrita, sin línea */
 .navbar-custom .nav-link.active {
   color: var(--ir-vino);
   font-weight: 700;
@@ -115,6 +109,7 @@
   border-color: var(--ir-terracota);
   color: var(--color-blanco);
 }
+
 /* =========================================
    * PERFIL DE USUARIO (LOGGED IN)
    ========================================= */
@@ -143,6 +138,7 @@
   font-size: 16px;
   font-weight: 500;
   color: var(--ir-vino);
+  white-space: nowrap;
 }
 
 .profile-avatar {
@@ -172,15 +168,10 @@
   right: 0;
   background-color: var(--color-blanco);
   min-width: 200px;
-  border-radius: 16px; /* Bordes más redondeados según tu imagen */
+  border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-
-  /* SOLUCIÓN CLAVE 1: Oculta el fondo que se escapa */
   overflow: hidden;
-
-  /* SOLUCIÓN CLAVE 2: Quitamos el padding del contenedor */
   padding: 0;
-
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -194,11 +185,10 @@
   transform: translateY(0);
 }
 
-/* Los ítems del menú */
 .profile-menu-item {
   display: flex;
   align-items: center;
-  padding: 16px 24px; /* El padding ahora va aquí, no en el contenedor */
+  padding: 16px 24px;
   text-decoration: none;
   color: var(--ir-marron-gris);
   font-family: "Onest", sans-serif;
@@ -206,17 +196,15 @@
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
-  width: 100%; /* Asegura que ocupe todo el ancho */
-  box-sizing: border-box; /* Evita que el padding lo haga más ancho */
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Hover: Fondo beige que cubre todo el ítem */
 .profile-menu-item:hover {
   background-color: var(--ir-durazno);
   color: var(--ir-vino);
 }
 
-/* Estilo especial para Cerrar Sesión (Separador y color) */
 .profile-menu-item[data-cerrar-sesion] {
   color: var(--ir-ladrillo);
   font-weight: 500;
@@ -232,7 +220,6 @@
    * CONTENEDOR DE AUTENTICACIÓN 
    ========================================= */
 #auth-container {
-  /* Ancho fijo que nunca cambia */
   width: 320px;
   min-width: 320px;
   height: 100%;
@@ -271,10 +258,279 @@
   object-fit: cover;
 }
 
-/* * 5. Responsividad HEADER */
+/* =========================================
+   * RESPONSIVIDAD HEADER - TABLETS (iPad Pro)
+   ========================================= */
+@media (max-width: 1199.98px) {
+  /* 1. Header principal */
+  .navbar-custom {
+    position: relative !important;
+    padding: 10px 24px !important;
+  }
+
+  /* 2. Logo */
+  .navbar-brand {
+    margin-right: auto !important;
+  }
+
+  /* 3. Botón hamburguesa a la derecha */
+  .navbar-toggler {
+    display: block !important;
+    margin-left: auto !important;
+    border: 1.5px solid var(--ir-terracota) !important;
+    border-radius: 8px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* 4. Ocultamos el perfil de la vista principal */
+  #auth-container {
+    display: none !important;
+  }
+
+  /* 5. EL MENÚ: Oculto por defecto */
+  .navbar-collapse {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: var(--ir-beige) !important;
+    padding: 1.5rem 24px !important;
+    border-radius: 0 !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    /* Usamos flexbox en columna para apilar los enlaces */
+    display: flex !important;
+    flex-direction: column !important;
+
+    /* Alineamos todo al inicio (arriba) por defecto */
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+
+  /* 6. Mostrar el menú con .show */
+  .navbar-collapse.show {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* 7. Enlaces en columna */
+  .navbar-custom .navbar-collapse .navbar-nav.mx-auto {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 1rem !important;
+    margin-bottom: 1.5rem !important;
+    padding-left: 0 !important;
+    align-items: flex-start !important; /* Alineados a la izquierda */
+  }
+
+  .navbar-custom .navbar-collapse .navbar-nav.mx-auto .nav-link {
+    display: block !important;
+    text-align: left !important;
+    padding: 8px 0 !important;
+    min-width: auto !important;
+    color: var(--ir-vino) !important;
+    font-size: 1.1rem !important;
+  }
+
+  /* 8. EL PERFIL: Lo forzamos a alinearse a la izquierda y lo empujamos al fondo */
+  .navbar-custom .navbar-collapse.show #auth-container {
+    display: flex !important;
+    flex-direction: row !important;
+
+    /* Forzamos alineación a la izquierda */
+    justify-content: flex-start !important;
+    align-items: center !important;
+
+    /* Ancho completo */
+    width: 100% !important;
+    max-width: 100% !important;
+
+    gap: 15px !important;
+    margin-top: 2rem !important; /* Lo empujamos hacia abajo */
+    padding-top: 1rem !important;
+    border-top: 1px solid rgba(84, 26, 26, 0.15) !important;
+    box-sizing: border-box !important;
+
+    /* Eliminamos cualquier margen que lo empuje a la derecha */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    /* Forzamos que este bloque se alinee al fondo del menú (opcional) */
+    /* align-self: flex-end !important; */
+  }
+
+  /* Los elementos internos (bandera y perfil) se alinean a la izquierda */
+  .navbar-custom .navbar-collapse.show #auth-container .header-flag-link,
+  .navbar-custom
+    .navbar-collapse.show
+    #auth-container
+    .profile-dropdown-container {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* 9. Icono hamburguesa */
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(84, 26, 26, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+}
+
+/* =========================================
+   * RESPONSIVIDAD HEADER - PANTALLAS MEDIANAS (Nest Hub Max, etc.)
+   * Aplica desde 1200px hasta 1399px
+   ========================================= */
+@media (max-width: 1399.98px) and (min-width: 1200px) {
+  /* 1. Header principal */
+  .navbar-custom {
+    position: relative !important;
+    padding: 10px 24px !important;
+  }
+
+  /* 2. Logo */
+  .navbar-brand {
+    margin-right: auto !important;
+  }
+
+  /* 3. Botón hamburguesa a la derecha */
+  .navbar-toggler {
+    display: block !important;
+    margin-left: auto !important;
+    border: 1.5px solid var(--ir-terracota) !important;
+    border-radius: 8px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* 4. Ocultamos el perfil de la vista principal */
+  #auth-container {
+    display: none !important;
+  }
+
+  /* 5. EL MENÚ: Oculto por defecto, se muestra con .show */
+  .navbar-collapse {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: var(--ir-beige) !important;
+    padding: 1.5rem 24px !important;
+    border-radius: 0 !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    /* Apilamos el contenido en columna */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+
+  .navbar-collapse.show {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* 6. Enlaces en columna */
+  .navbar-custom .navbar-collapse .navbar-nav.mx-auto {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 1rem !important;
+    margin-bottom: 1.5rem !important;
+    padding-left: 0 !important;
+    align-items: flex-start !important;
+  }
+
+  .navbar-custom .navbar-collapse .navbar-nav.mx-auto .nav-link {
+    display: block !important;
+    text-align: left !important;
+    padding: 8px 0 !important;
+    min-width: auto !important;
+    color: var(--ir-vino) !important;
+    font-size: 1.1rem !important;
+  }
+
+  /* 7. El perfil dentro del menú, alineado a la izquierda y al fondo */
+  .navbar-custom .navbar-collapse.show #auth-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 15px !important;
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
+    border-top: 1px solid rgba(84, 26, 26, 0.15) !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Los elementos internos se alinean a la izquierda */
+  .navbar-custom .navbar-collapse.show #auth-container .header-flag-link,
+  .navbar-custom
+    .navbar-collapse.show
+    #auth-container
+    .profile-dropdown-container {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* 8. Icono hamburguesa en color vino */
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(84, 26, 26, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+}
+
+/* =========================================
+   * 6. RESPONSIVIDAD HEADER - MÓVILES
+   ========================================= */
 @media (max-width: 991px) {
   .navbar-custom {
-    padding: 10px 15px;
+    padding: 10px 24px;
+  }
+
+  .navbar-collapse {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: var(--ir-beige) !important;
+    padding: 1.5rem 24px !important; /* Asegúrate de que sea 1.5rem 24px */
+    border-radius: 0 !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
   }
 
   .logo {
@@ -294,12 +550,30 @@
   .navbar-custom .nav-link:hover {
     color: var(--ir-vino);
   }
+  .navbar-toggler {
+    margin-left: auto;
+  }
 
   .btn-iniciar,
   .btn-registrar {
     display: block;
     width: 100%;
     margin-top: 10px;
+  }
+
+  #auth-container {
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    min-width: auto;
+    margin-top: 1rem;
+  }
+
+  /* En móvil, volvemos a mostrar el nombre si el espacio lo permite */
+  .profile-name {
+    display: block;
   }
 }
 
@@ -330,8 +604,9 @@
   margin: 0;
 }
 
-/* * 6. Responsividad FOOTER */
-
+/* =========================================
+   * 7. RESPONSIVIDAD FOOTER
+   ========================================= */
 @media (max-width: 576px) {
   .footer-pawnshare {
     padding: 30px 15px;

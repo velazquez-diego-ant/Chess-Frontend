@@ -1,6 +1,5 @@
-// assets/js/core/plantillasLayout.js
 
-// ===== index.html =====
+//* ===== index.html =====
 export const header_index = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
@@ -18,10 +17,8 @@ export const header_index = `
             <li class="nav-item"><a class="nav-link" data-text="Guía" href="./pages/guia.html">Guía</a></li>
             <li class="nav-item"><a class="nav-link" data-text="Contacto" href="./pages/contacto.html">Contacto</a></li>
           </ul>
-          <!-- Aquí se inyectarán los botones o el perfil -->
-          <div class="navbar-nav mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container">
-            <!-- Contenido dinámico -->
-          </div>
+          <!-- Contenedor de autenticación -->
+          <div class="mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
         </div>
       </div>
     </nav>
@@ -36,7 +33,7 @@ export const footer_index = `
     </footer>
 `;
 
-// ===== pages/publicaciones.html =====
+//* ===== pages/publicaciones.html =====
 export const header_publicaciones = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
@@ -54,7 +51,7 @@ export const header_publicaciones = `
             <li class="nav-item"><a class="nav-link" data-text="Guía" href="./guia.html">Guía</a></li>
             <li class="nav-item"><a class="nav-link" data-text="Contacto" href="./contacto.html">Contacto</a></li>
           </ul>
-          <div class="navbar-nav mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
+          <div class="mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
         </div>
       </div>
     </nav>
@@ -69,7 +66,7 @@ export const footer_publicaciones = `
     </footer>
 `;
 
-// ===== pages/comunidad.html =====
+//* ===== pages/comunidad.html =====
 export const header_comunidad = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
@@ -87,7 +84,7 @@ export const header_comunidad = `
             <li class="nav-item"><a class="nav-link" data-text="Guía" href="./guia.html">Guía</a></li>
             <li class="nav-item"><a class="nav-link" data-text="Contacto" href="./contacto.html">Contacto</a></li>
           </ul>
-          <div class="navbar-nav mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
+          <div class="mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
         </div>
       </div>
     </nav>
@@ -102,7 +99,7 @@ export const footer_comunidad = `
     </footer>
 `;
 
-// ===== pages/guia.html =====
+//* ===== pages/guia.html =====
 export const header_guia = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
@@ -120,7 +117,7 @@ export const header_guia = `
             <li class="nav-item"><a class="nav-link active" data-text="Guía" href="./guia.html">Guía</a></li>
             <li class="nav-item"><a class="nav-link" data-text="Contacto" href="./contacto.html">Contacto</a></li>
           </ul>
-          <div class="navbar-nav mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
+          <div class="mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
         </div>
       </div>
     </nav>
@@ -153,7 +150,7 @@ export const header_contacto = `
             <li class="nav-item"><a class="nav-link" data-text="Guía" href="./guia.html">Guía</a></li>
             <li class="nav-item"><a class="nav-link active" data-text="Contacto" href="./contacto.html">Contacto</a></li>
           </ul>
-          <div class="navbar-nav mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
+          <div class="mb-2 mb-lg-0 gap-3 align-items-center" id="auth-container"></div>
         </div>
       </div>
     </nav>

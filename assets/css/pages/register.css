@@ -75,9 +75,9 @@ body {
 
 /* 3. La barrita que se mueve (Terracota para que contraste) */
 ::-webkit-scrollbar-thumb {
-  background: var(--ir-terracota); 
+  background: var(--ir-terracota);
   border-radius: 10px;
-  border: 2px solid var(--ir-durazno); 
+  border: 2px solid var(--ir-durazno);
 }
 
 /* 4. Efecto Hover cuando el usuario toca la barra */
@@ -88,7 +88,7 @@ body {
 /* 5. Soporte para Firefox (que no usa webkit) */
 .main-registro {
   scrollbar-color: var(--ir-terracota) var(--ir-durazno);
-  scrollbar-width: thin; 
+  scrollbar-width: thin;
 }
 
 /* =========================================
@@ -237,6 +237,86 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* =========================================
+   PERSONALIZACIÓN DEL CALENDARIO (FLATPICKR)
+   ========================================= */
+
+/* Contenedor del calendario */
+.flatpickr-calendar {
+  background-color: var(--color-blanco) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  font-family: "Onest", sans-serif !important;
+  border: none !important;
+}
+
+/* Flechas de navegación (Mes anterior/siguiente) */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  fill: var(--ir-vino) !important;
+  color: var(--ir-vino) !important;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+  background-color: var(--ir-durazno) !important;
+  border-radius: 5px;
+}
+
+/* Texto del mes y año (ej. Julio 2022) */
+.flatpickr-current-month {
+  font-weight: 700 !important;
+  color: var(--ir-vino) !important;
+  font-size: 1.1rem !important;
+}
+
+/* Días de la semana (Dom, Lun, Mar...) */
+.flatpickr-weekday {
+  color: var(--ir-terracota) !important;
+  font-weight: 500 !important;
+  opacity: 0.8 !important;
+}
+
+/* Días del mes */
+.flatpickr-day {
+  color: var(--ir-marron-gris) !important;
+  border-radius: 8px !important;
+  font-weight: 400 !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Día al pasar el mouse */
+.flatpickr-day:hover {
+  background-color: var(--ir-durazno) !important;
+  color: var(--ir-vino) !important;
+}
+
+/* Día seleccionado */
+.flatpickr-day.selected {
+  background-color: var(--ir-terracota) !important;
+  border-color: var(--ir-terracota) !important;
+  color: var(--color-blanco) !important;
+  font-weight: 600 !important;
+}
+
+/* Día de hoy */
+.flatpickr-day.today {
+  border-color: var(--ir-terracota) !important;
+  color: var(--ir-vino) !important;
+}
+
+/* Días de otros meses (atenuados) */
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+  color: var(--ir-marron-gris) !important;
+  opacity: 0.3 !important;
+}
+
+/* Icono del calendario nativo que quitamos en CSS */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+/* =========================================
    ESTADOS DE INTERACCIÓN (CLICK/FOCUS)
    ========================================= */
 
@@ -307,6 +387,27 @@ input[type="date"].custom-input:focus {
   height: 20px;
   display: block;
 }
+/* =========================================
+   EFECTO DE PUNTOS EN LAS CONTRASEÑAS (CORREGIDO)
+   ========================================= */
+
+/* El espaciado SOLO se aplica cuando el input es de tipo "password" */
+input[type="password"]#pass,
+input[type="password"]#confirm-pass {
+  letter-spacing: 6px !important;
+}
+
+/* El placeholder NO debe tener espaciado */
+input[type="password"]#pass::placeholder,
+input[type="password"]#confirm-pass::placeholder {
+  letter-spacing: normal !important;
+}
+
+/* Padding derecho para no chocar con el ojo */
+#pass,
+#confirm-pass {
+  padding-right: 45px !important;
+}
 
 /* =========================================
    REQUISITOS DE CONTRASEÑA
@@ -332,15 +433,13 @@ input[type="date"].custom-input:focus {
   display: flex;
   align-items: center;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 400; /* Forzamos que siempre sea regular, sin negritas */
   color: var(--ir-vino);
   opacity: 0.7;
   margin-bottom: 0.5rem;
-  transition: opacity 0.3s ease;
-}
-
-.lista-requisitos li:hover {
-  opacity: 1;
+  transition:
+    opacity 0.3s ease,
+    color 0.3s ease;
 }
 
 .circulo {
@@ -352,6 +451,15 @@ input[type="date"].custom-input:focus {
   border: 1px solid var(--ir-fondo);
   margin-right: 10px;
   flex-shrink: 0;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* ESTADO CUMPLIDO: Círculo Verde */
+.lista-requisitos li.cumplido .circulo {
+  background-color: #43b213; /* Verde éxito de Bootstrap */
+  border-color: #43b213;
 }
 
 /* =========================================

@@ -1,12 +1,15 @@
 /* =========================================
-  * 1. VARIABLES Y CONFIGURACIÓN GENERAL
+ *  ESTILOS GENERALES 
    ========================================= */
 html,
 body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; 
+  overflow-x: clip;
+}
+html {
+  scroll-behavior: smooth;
   box-sizing: border-box;
 }
 
@@ -23,432 +26,550 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+/* =========================================
+ *  HEADER 
+   ========================================= */
+.header-pawnshare {
+  background-color: var(--ir-beige);
   width: 100%;
-  max-width: 100%;
+  height: 70px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 /* =========================================
-  * 2. SECCIÓN HERO (Portada)
+ *  CONTENEDOR PRINCIPAL
    ========================================= */
-.hero-section {
+.main-registro {
+  flex-grow: 1;
+  width: 100%; /* NO uses 100vw aquí */
+  background-image: url("/assets/img/img-register.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
-  min-height: 85vh;
-  display: flex;
-  align-items: center;
-  padding: 50px 0;
-  background-color: var(--ir-verde-bosque);
-  overflow: hidden;
+  padding: 2rem 0;
+  overflow-x: clip;
+  overflow-y: auto;
+}
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
-.hero-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
+/* =========================================
+ *  CUSTOM SCROLLBAR 
+   ========================================= */
+
+/* 1. Ancho de la barra (delgada pero visible) */
+::-webkit-scrollbar {
+  width: 10px;
+
+
 }
 
-.hero-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0) 60%
-  );
-  z-index: 1;
+/* 2. El fondo por donde se desliza */
+::-webkit-scrollbar-track {
+  background: var(--ir-durazno);
 }
 
-.hero-section .container {
-  position: relative;
-  z-index: 2;
+/* 3. La barrita que se mueve (Terracota para que contraste) */
+::-webkit-scrollbar-thumb {
+  background: var(--ir-terracota);
+  border-radius: 10px;
+  border: 2px solid var(--ir-durazno);
 }
 
-.hero-title {
-  font-weight: 700;
-  font-size: clamp(2.5rem, 6vw, 4rem);
+/* 4. Efecto Hover cuando el usuario toca la barra */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ir-vino); /* Se vuelve más oscuro al interactuar */
+}
+
+/* 5. Soporte para Firefox (que no usa webkit) */
+.main-registro {
+  scrollbar-color: var(--ir-terracota) var(--ir-durazno);
+  scrollbar-width: thin;
+}
+
+/* =========================================
+   *  ESTILOS RESPONSIVE PARA TEXTOS
+   ========================================= */
+.texto-titulo {
   color: var(--color-blanco);
+  font-weight: 700;
+  font-size: 2.5rem;
   line-height: 1.1;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);
+  text-align: center;
 }
 
-.hero-title .text-highlight {
-  color: var(--ir-terracota);
-}
-
-.hero-text {
-  font-weight: 400;
-  font-size: clamp(1rem, 2vw, 1.1rem);
+.texto-subtitulo {
   color: var(--color-blanco);
-  margin-bottom: 30px;
-  max-width: 650px;
-  line-height: 1.6;
-}
-
-.btn-hero-explorar {
-  font-family: "Onest", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1.1rem;
-  background-color: var(--ir-terracota);
-  color: var(--color-blanco);
-  padding: 12px 35px;
-  border-radius: 50px;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s ease;
-  border: 2px solid var(--ir-terracota);
-}
-
-.btn-hero-explorar:hover {
-  background-color: var(--ir-terracota-hover);
-  border-color: var(--ir-terracota-hover);
-  color: var(--color-blanco);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  line-height: 1.5;
+  max-width: 100%;
+  text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  margin: 0 auto 2rem auto;
 }
 
 /* =========================================
-   * 3. SECCIÓN DESCUBRIMIENTO (Tarjetas)
+   *  CONTENEDOR Y CAJA DEL FORMULARIO
    ========================================= */
-.seccion-descubrimiento {
-  background-color: var(--ir-fondo);
-  padding: 80px 0;
+.contenedor-formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.descubrimiento-titulo {
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3vw, 2rem);
-  color: var(--ir-vino);
-  margin-bottom: 20px;
-  line-height: 1.3;
-}
-
-.descubrimiento-texto {
-  font-weight: 400;
-  font-size: 1rem;
-  color: var(--ir-marron-gris);
-  line-height: 1.7;
-}
-
-.tarjeta-especie {
-  background-color: var(--color-blanco);
+.caja-formulario {
+  background-color: rgba(241, 226, 209, 0.9);
+  max-width: 517px;
+  width: 100%;
+  min-height: 825px;
   border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  height: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.tarjeta-especie:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-.img-especie {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  background-color: #f0d9b5;
-}
-
-.tarjeta-info {
-  padding: 20px;
-  font-weight: 400;
-  font-size: 0.95rem;
-  color: var(--ir-marron-gris);
-  line-height: 1.5;
-  text-align: left;
-  background-color: var(--color-blanco);
-  flex-grow: 1;
+  position: relative;
 }
 
 /* =========================================
-   * 4. SECCIÓN CONECTA (Imagen y Pasos)
+   *  LOGO
    ========================================= */
-.seccion-cuidemos {
-  background-color: var(--ir-fondo);
-  padding: 80px 0;
-}
-
-.col-imagen {
+.logo-contenedor {
+  position: relative;
+  margin-top: -15px;
+  margin-bottom: 25px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
-.contenedor-imagen-principal {
-  position: relative;
-  width: 100%;
-  max-width: 380px;
-  margin: 0;
+.logo-img {
+  height: 90px;
+  width: auto;
+  margin-left: 0px;
 }
 
-.imagen-principal {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 30px;
-  background-color: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-}
-
-.cuidemos-titulo {
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3vw, 2rem);
-  color: var(--ir-vino);
-  line-height: 1.3;
-  margin-bottom: 3rem;
-}
-
-.contenedor-pasos-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.contenedor-paso {
+/* =========================================
+   *  FORMULARIO Y LABELS
+   ========================================= */
+.formulario-registro {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: auto;
+  height: 100%;
 }
 
-.circulo-paso {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 3px solid var(--ir-terracota);
-  background-color: transparent;
+.form-label {
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ir-vino);
+  opacity: 0.7;
+  margin-bottom: 0.4rem;
+  transition: opacity 0.3s ease;
+}
+
+/* =========================================
+   *  INPUTS PERSONALIZADOS (FONDO BLANCO SÓLIDO)
+   ========================================= */
+.input-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  background-color: var(--color-blanco) !important;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.custom-input {
+  font-family: "Onest", sans-serif;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 15px 13px 45px;
+  background-color: transparent !important;
+
+  color: rgba(84, 26, 26, 0.6) !important;
+  -webkit-text-fill-color: rgba(84, 26, 26, 0.6) !important;
+
+  transition: color 0.3s ease;
+  width: 100%;
+}
+
+.custom-input::placeholder {
+  color: rgba(84, 26, 26, 0.6) !important;
+  font-family: "Onest", sans-serif;
+}
+
+/* Fecha (dd/mm/aaaa) */
+input[type="date"].custom-input {
+  color: rgba(84, 26, 26, 0.6) !important;
+  -webkit-text-fill-color: rgba(84, 26, 26, 0.6) !important;
+
+
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+
+}
+
+/* Padding extra a la derecha para los inputs que tienen el ojo */
+#pass,
+#confirm-pass {
+  padding-right: 45px;
+
+}
+
+/* =========================================
+   *  PERSONALIZACIÓN DEL CALENDARIO (FLATPICKR)
+   ========================================= */
+
+/* Contenedor del calendario */
+.flatpickr-calendar {
+  background-color: var(--color-blanco) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  font-family: "Onest", sans-serif !important;
+  border: none !important;
+
+}
+
+/* Flechas de navegación (Mes anterior/siguiente) */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  fill: var(--ir-vino) !important;
+  color: var(--ir-vino) !important;
+
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+  background-color: var(--ir-durazno) !important;
+  border-radius: 5px;
+}
+
+/* Texto del mes y año (ej. Julio 2022) */
+.flatpickr-current-month {
+  font-weight: 700 !important;
+  color: var(--ir-vino) !important;
+  font-size: 1.1rem !important;
+}
+
+/* Días de la semana (Dom, Lun, Mar...) */
+.flatpickr-weekday {
+  color: var(--ir-terracota) !important;
+  font-weight: 500 !important;
+  opacity: 0.8 !important;
+}
+
+/* Días del mes */
+.flatpickr-day {
+  color: var(--ir-marron-gris) !important;
+  border-radius: 8px !important;
+  font-weight: 400 !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Día al pasar el mouse */
+.flatpickr-day:hover {
+  background-color: var(--ir-durazno) !important;
+  color: var(--ir-vino) !important;
+}
+
+/* Día seleccionado */
+.flatpickr-day.selected {
+  background-color: var(--ir-terracota) !important;
+  border-color: var(--ir-terracota) !important;
+  color: var(--color-blanco) !important;
+  font-weight: 600 !important;
+}
+
+/* Día de hoy */
+.flatpickr-day.today {
+  border-color: var(--ir-terracota) !important;
+  color: var(--ir-vino) !important;
+}
+
+/* Días de otros meses (atenuados) */
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+  color: var(--ir-marron-gris) !important;
+  opacity: 0.3 !important;
+}
+
+/* Icono del calendario nativo que quitamos en CSS */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+/* =========================================
+   *  ESTADOS DE INTERACCIÓN (CLICK/FOCUS)
+   ========================================= */
+
+/* 1. Quitar el borde azul nativo de Bootstrap */
+.custom-input:focus,
+input[type="date"].custom-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 2. Aplicar la sombra al contenedor cuando el input tiene foco */
+.input-wrapper:focus-within {
+  box-shadow: 0 6px 18px rgba(64, 81, 59, 0.2);
+
+
+}
+
+/* 3. Cambiar color del texto cuando el input tiene foco */
+.input-wrapper:focus-within .custom-input,
+.input-wrapper:focus-within input[type="date"].custom-input {
+  color: var(--ir-vino) !important;
+  -webkit-text-fill-color: var(--ir-vino) !important;
+
+}
+
+.input-wrapper:focus-within .custom-input::placeholder {
+  color: var(--ir-vino) !important;
+}
+
+/* 4. Iluminar SOLO el icono de la izquierda al hacer foco en el input */
+.input-wrapper:focus-within .input-icon {
+  opacity: 1;
+
+
+}
+
+/* =========================================
+   *  TOGGLE PASSWORD (OJO)
+   ========================================= */
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15px;
-  animation: ondaLenta 3s ease-in-out infinite;
+  z-index: 3;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
+  opacity: 0.6; /* Opacidad base tenue, NO se altera al tocar el input */
 }
 
-.contenedor-paso:nth-child(1) .circulo-paso {
-  animation-delay: 0s;
-}
-.contenedor-paso:nth-child(2) .circulo-paso {
-  animation-delay: 0.4s;
-}
-.contenedor-paso:nth-child(3) .circulo-paso {
-  animation-delay: 0.8s;
+/* Efecto SOLO cuando el mouse pasa por encima del ojo */
+.toggle-password:hover {
+  opacity: 1;
 }
 
-@keyframes ondaLenta {
-  0% {
-    transform: translateY(0px);
-    box-shadow: 0 0 0 0 rgba(183, 116, 102, 0.4);
-  }
-  50% {
-    transform: translateY(-8px);
-    box-shadow: 0 0 0 12px rgba(183, 116, 102, 0);
-  }
-  100% {
-    transform: translateY(0px);
-    box-shadow: 0 0 0 0 rgba(183, 116, 102, 0);
-  }
+/* Efecto SOLO cuando se hace clic en el ojo */
+.toggle-password:active {
+  opacity: 1;
+  transform: translateY(-50%) scale(0.9);
 }
 
-.icono-paso {
-  width: 40px;
-  height: auto;
+.toggle-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+/* =========================================
+   *  EFECTO DE PUNTOS EN LAS CONTRASEÑAS
+   ========================================= */
+
+/* El espaciado SOLO se aplica cuando el input es de tipo "password" */
+input[type="password"]#pass,
+input[type="password"]#confirm-pass {
+  letter-spacing: 6px !important;
 }
 
-.texto-paso {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--ir-marron-gris);
-  line-height: 1.4;
-  margin: 0;
-  text-align: center;
-  max-width: 120px;
+/* El placeholder NO debe tener espaciado */
+input[type="password"]#pass::placeholder,
+input[type="password"]#confirm-pass::placeholder {
+  letter-spacing: normal !important;
+}
+
+/* Padding derecho para no chocar con el ojo */
+#pass,
+#confirm-pass {
+  padding-right: 45px !important;
 }
 
 /* =========================================
-   * 5. SECCIÓN FINAL CTA
+   *  REQUISITOS DE CONTRASEÑA
    ========================================= */
-.seccion-final-cta {
-  background-color: var(--ir-fondo);
-  padding: 80px 0;
+.requisitos-contenedor {
+  font-family: "Onest", sans-serif;
 }
 
-.cta-titulo {
-  font-weight: 700;
-  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  color: var(--ir-vino);
-  margin-bottom: 15px;
-}
-
-.cta-texto {
-  font-weight: 400;
-  font-size: 1rem;
-  color: var(--ir-marron-gris);
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-
-.btn-cta {
+.requisitos-titulo {
+  font-size: 1.1rem;
   font-weight: 600;
+  color: var(--ir-vino);
+  margin-bottom: 0.8rem;
+}
+
+.lista-requisitos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-requisitos li {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ir-vino);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+  transition:
+    opacity 0.3s ease,
+    color 0.3s ease;
+}
+
+.circulo {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--ir-fondo);
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* ESTADO CUMPLIDO: Círculo Verde */
+.lista-requisitos li.cumplido .circulo {
+  background-color: #43b213;
+  border-color: #43b213;
+}
+
+/* =========================================
+   *  BOTÓN
+   ========================================= */
+.btn-registro {
   background-color: var(--ir-terracota);
   color: var(--color-blanco);
-  padding: 12px 35px;
-  border-radius: 50px;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s ease;
-  border: 2px solid var(--ir-terracota);
-  align-self: center;
+  font-family: "Onest", sans-serif;
+  font-weight: 400 !important;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 15px;
+  width: 75%;
+  padding: 0.8rem 1rem;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
-.btn-cta:hover {
+.btn-registro:hover {
   background-color: var(--ir-terracota-hover);
-  border-color: var(--ir-terracota-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  color: var(--color-blanco);
+  transform: scale(1.02);
+}
+
+.btn-registro:active {
+  background-color: var(--ir-terracota);
 }
 
 /* =========================================
-   * 6. RESPONSIVIDAD
+   *  FOOTER
    ========================================= */
+.texto-footer-form {
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  color: var(--ir-vino);
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
 
-/* --- TABLETS (Hasta 1199px: iPad Pro, Surface, etc.) --- */
-@media (max-width: 1199.98px) {
-  .hero-section {
-    min-height: 70vh;
-    padding: 40px 0;
-    text-align: center;
+.link-login {
+  color: var(--ir-terracota);
+  opacity: 0.7;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.link-login:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+
+/* =========================================
+   *  MEDIA QUERIES (Responsividad)
+   ========================================= */
+@media (min-width: 768px) {
+  .texto-titulo {
+    font-size: 4.5rem;
+    text-align: left;
+    margin-bottom: 2rem;
   }
-
-  .hero-section .row {
-    flex-direction: column !important;
+  .texto-subtitulo {
+    font-size: 1.25rem;
+    max-width: 90%;
+    text-align: left;
+    margin: 0;
   }
+  .contenedor-formulario {
+    justify-content: flex-end;
+    padding-right: 3rem;
 
-  .hero-section .col-lg-7,
-  .hero-section .col-md-9 {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
-
-  .hero-title {
-    font-size: 3rem;
-  }
-
-  .hero-text {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 80%;
-  }
-
-  .d-flex.gap-3 {
-    justify-content: center;
-  }
-
-  /* DESCUBRIMIENTO: Apilamos texto y tarjetas */
-  .seccion-descubrimiento .row {
-    flex-direction: column !important;
-  }
-
-  .seccion-descubrimiento .col-lg-4,
-  .seccion-descubrimiento .col-lg-8 {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-  }
-
-  .seccion-descubrimiento .col-lg-4 {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  /* CONECTA: Apilamos imagen y pasos */
-  .seccion-cuidemos .row {
-    flex-direction: column !important;
-  }
-
-  .seccion-cuidemos .col-lg-5,
-  .seccion-cuidemos .col-lg-7 {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-  }
-
-  .contenedor-imagen-principal {
-    margin: 0 auto 40px auto !important;
-  }
-
-  .cuidemos-titulo {
-    text-align: center;
-  }
-
-  .contenedor-pasos-row {
-    justify-content: center;
   }
 }
 
-/* --- MÓVILES (Hasta 767px) --- */
-@media (max-width: 767.98px) {
-  .hero-title {
-    font-size: 2.2rem;
-  }
-
-  /* Las tarjetas de ajedrez ocupan el 100% */
-  .seccion-descubrimiento .col-md-4 {
-    width: 100% !important;
-    margin-bottom: 30px;
-  }
-
-  .img-especie {
-    max-height: 350px;
-  }
-
-  /* Pasos de Conecta: 2 arriba, 1 abajo centrado */
-  .contenedor-pasos-row {
-    max-width: 100%;
-    gap: 1.5rem;
-  }
-
-  .contenedor-paso {
-    width: 42%;
-    max-width: 150px;
-  }
-
-  .contenedor-paso:nth-child(3) {
-    width: 100%;
-    max-width: 150px;
-    margin: 1rem auto 0 auto;
-    align-items: center;
+@media (max-height: 900px) {
+  .caja-formulario {
+    min-height: auto;
+    height: auto;
+    margin: 20px 0;
   }
 }
 
-/* --- MÓVILES PEQUEÑOS (Hasta 576px) --- */
+
 @media (max-width: 576px) {
-  .hero-title {
-    font-size: 1.8rem;
+  .caja-formulario {
+    padding: 25px 20px;
   }
-  .cta-texto br {
-    display: none;
+  .logo-img {
+    height: 70px;
+  }
+  .custom-btn,
+  .btn-registro {
+    width: 100%;
   }
 }

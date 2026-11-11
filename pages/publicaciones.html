@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PawnShare - Publicaciones</title>
 
-    <!--TODO: Bootstrap 5 CSS -->
+    <!-- =========================================
+         PROTECCIÓN DE RUTA (Solo para páginas privadas)
+         ========================================= -->
+    <script src="../assets/js/core/init-guard.js" type="module"></script>
+
+    <!--TODO:  Bootstrap 5 CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -22,10 +27,329 @@
     <!--TODO: CSS Base y Paleta -->
     <link rel="stylesheet" href="../assets/css/base/paleta.css" />
     <link rel="stylesheet" href="../assets/css/base/render.css" />
+    <link rel="stylesheet" href="../assets/css/pages/publicaciones.css" />
   </head>
-  <body>
-    <!--TODO: Bootstrap 5 JS (OBLIGATORIO para el botón hamburguesa) -->
+  <body class="auth-pending">
+    <!-- CONTENEDOR PRINCIPAL DEL DASHBOARD -->
+    <main class="dashboard-layout">
+      <!-- =========================================
+        *   SIDEBAR IZQUIERDO
+           ========================================= -->
+      <aside class="dashboard-sidebar">
+        <!-- Tarjeta del Usuario -->
+        <div class="sidebar-user-card">
+          <img
+            src="../assets/img/icons/mode-clear/icon-img-profile.svg"
+            alt="Perfil"
+            class="sidebar-user-icon"
+          />
+          <span class="sidebar-user-name" id="sidebar-user-name">Usuario</span>
+        </div>
+
+        <!-- Menú de Navegación -->
+        <nav class="sidebar-nav">
+          <a href="#" class="sidebar-link" data-menu="filtros">
+            <img
+              src="../assets/img/menu/icon-menu-filtros.svg"
+              alt="Filtros"
+              class="sidebar-icon"
+            />
+            <span>Filtros</span>
+          </a>
+          <a href="#" class="sidebar-link" data-menu="grupos">
+            <img
+              src="../assets/img/menu/icon-menu-grupos.svg"
+              alt="Grupos"
+              class="sidebar-icon"
+            />
+            <span>Grupos Recomendados</span>
+          </a>
+          <a href="#" class="sidebar-link" data-menu="maestros">
+            <img
+              src="../assets/img/menu/icon-menu-maestros.svg"
+              alt="Maestros"
+              class="sidebar-icon"
+            />
+            <span>Maestros en vivo</span>
+          </a>
+          <a href="#" class="sidebar-link" data-menu="reglas">
+            <img
+              src="../assets/img/menu/icon-menu-reglas.svg"
+              alt="Reglas"
+              class="sidebar-icon"
+            />
+            <span>Reglas de la comunidad</span>
+          </a>
+          <a href="#" class="sidebar-link" data-menu="eventos">
+            <img
+              src="../assets/img/menu/icon-menu-eventos.svg"
+              alt="Eventos"
+              class="sidebar-icon"
+            />
+            <span>Eventos</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- =========================================
+        *   CONTENIDO PRINCIPAL
+           ========================================= -->
+      <section class="dashboard-main-content">
+        <!-- Botón Crear Publicación -->
+        <button class="btn-crear-publicacion">
+          <span>Crear Publicación</span>
+          <img
+            src="../assets/img/publicacion/icon-publicacion-agregar.svg"
+            alt="Agregar"
+            class="icon-crear-pub"
+          />
+        </button>
+
+        <!-- TARJETA DE PUBLICACIÓN -->
+        <article class="publicacion-card">
+          <!-- Header de la Publicación (Usuario + Opciones) -->
+          <div class="publicacion-header">
+            <div class="publicacion-user">
+              <img
+                src="../assets/img/icons/mode-clear/icon-img-profile.svg"
+                alt="Perfil"
+                class="publicacion-avatar"
+              />
+              <div class="publicacion-user-info">
+                <span class="publicacion-user-name" id="pub-user-name"
+                  >Usuario</span
+                >
+                <span class="publicacion-fecha">Fecha: (Hace 2 horas)</span>
+              </div>
+            </div>
+
+            <!-- Menú de Opciones (3 puntos) -->
+            <div class="publicacion-options-container">
+              <button class="btn-options" id="btn-options-1">
+                <img
+                  src="../assets/img/publicacion/icon-publicacion-opcion.svg"
+                  alt="Opciones"
+                />
+              </button>
+              <div class="publicacion-dropdown" id="dropdown-1">
+                <button class="dropdown-item">
+                  <img
+                    src="../assets/img/publicacion/icon-publicacion-no-interes.svg"
+                    alt="No me interesa"
+                  />
+                  <span>No me interesa</span>
+                </button>
+                <button class="dropdown-item">
+                  <img
+                    src="../assets/img/publicacion/icon-publicacion-save.svg"
+                    alt="Guardar"
+                  />
+                  <span>Guardar</span>
+                </button>
+                <button class="dropdown-item">
+                  <img
+                    src="../assets/img/publicacion/icon-publicacion-reportar.svg"
+                    alt="Reportar"
+                  />
+                  <span>Reportar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido de la Publicación -->
+          <div class="publicacion-content">
+            <p class="publicacion-texto">
+              ¡Orgullo latino! Jorge Cori se consagra doble campeón
+              sudamericano. ¿Qué te pareció su desempeño en la modalidad rápida?
+            </p>
+            <img
+              src="../assets/img/publicacion/img-publicacion-1.svg"
+              alt="Publicación de Jorge Cori"
+              class="publicacion-img"
+            />
+          </div>
+
+          <!-- Footer de la Publicación (Acciones) -->
+          <div class="publicacion-footer">
+            <button class="btn-action-pub">
+              <img
+                src="../assets/img/publicacion/icon-publicacion-gustar.svg"
+                alt="Me gusta"
+              />
+              <span>Me gusta</span>
+            </button>
+            <button class="btn-action-pub">
+              <img
+                src="../assets/img/publicacion/icon-publicacion-comentar.svg"
+                alt="Comentar"
+              />
+              <span>Comentar</span>
+            </button>
+            <button class="btn-action-pub">
+              <img
+                src="../assets/img/publicacion/icon-publicacion-compartir.svg"
+                alt="Compartir"
+              />
+              <span>Compartir</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- SEGUNDA TARJETA DE PUBLICACIÓN -->
+        <article class="publicacion-card">
+          <div class="publicacion-header">
+            <div class="publicacion-user">
+              <img
+                src="../assets/img/icons/mode-clear/icon-img-profile.svg"
+                alt="Perfil"
+                class="publicacion-avatar"
+              />
+              <div class="publicacion-user-info">
+                <span class="publicacion-user-name" id="pub-user-name-2"
+                  >Usuario</span
+                >
+                <span class="publicacion-fecha">Fecha: (Hace 5 horas)</span>
+              </div>
+            </div>
+
+            <!-- Menú de Opciones (3 puntos) -->
+            <div class="publicacion-options-container">
+              <button class="btn-options" id="btn-options-2">
+                <img
+                  src="../assets/img/publicacion/icon-publicacion-opcion.svg"
+                  alt="Opciones"
+                />
+              </button>
+              <div class="publicacion-dropdown" id="dropdown-2">
+                <button class="dropdown-item">
+                  <img
+                    src="../assets/img/publicacion/icon-publicacion-no-interes.svg"
+                    alt="No me interesa"
+                  />
+                  <span>No me interesa</span>
+                </button>
+                <button class="dropdown-item">
+                  <img
+                    src="../assets/img/publicacion/icon-publicacion-save.svg"
+                    alt="Guardar"
+                  />
+                  <span>Guardar</span>
+                </button>
+                <button class="dropdown-item">
+                  <img
+                    src="../assets/img/publicacion/icon-publicacion-reportar.svg"
+                    alt="Reportar"
+                  />
+                  <span>Reportar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido de la Publicación -->
+          <div class="publicacion-content">
+            <p class="publicacion-texto">
+              La defensa siciliana es una de las aperturas más agresivas y
+              dinámicas. ¿Ya la has probado en tus partidas? ♟️
+            </p>
+            <img
+              src="../assets/img/publicacion/img-publicacion-2.svg"
+              alt="Publicación de defensa siciliana"
+              class="publicacion-img"
+            />
+          </div>
+
+          <!-- Footer de la Publicación (Acciones) -->
+          <div class="publicacion-footer">
+            <button class="btn-action-pub">
+              <img
+                src="../assets/img/publicacion/icon-publicacion-gustar.svg"
+                alt="Me gusta"
+              />
+              <span>Me gusta</span>
+            </button>
+            <button class="btn-action-pub">
+              <img
+                src="../assets/img/publicacion/icon-publicacion-comentar.svg"
+                alt="Comentar"
+              />
+              <span>Comentar</span>
+            </button>
+            <button class="btn-action-pub">
+              <img
+                src="../assets/img/publicacion/icon-publicacion-compartir.svg"
+                alt="Compartir"
+              />
+              <span>Compartir</span>
+            </button>
+          </div>
+        </article>
+        <!-- FIN DE SEGUNDA TARJETA -->
+
+        <!-- Texto de Bienvenida -->
+        <div class="welcome-message">
+          <h2>Bienvenido al Feed</h2>
+          <p>Próximamente verás más publicaciones aquí.</p>
+        </div>
+      </section>
+
+      <!-- =========================================
+        *   PANEL DERECHO
+           ========================================= -->
+      <aside class="dashboard-right-sidebar">
+        <div class="right-search-container">
+          <input
+            type="text"
+            class="right-search-input"
+            placeholder="Buscar en PawnShare..."
+          />
+          <img
+            src="../assets/img/menu/icon-menu-search.svg"
+            alt="Buscar"
+            class="right-search-icon"
+          />
+        </div>
+
+        <div class="right-card">
+          <h3 class="right-card-title">Tendencias</h3>
+          <ul class="right-card-list">
+            <li>#DefensaSiciliana (1.2k posts)</li>
+            <li>#JaqueMateEn3 (850 posts)</li>
+            <li>#GambitoDeDama (600 posts)</li>
+            <li>#TorneoLocal (320 posts)</li>
+          </ul>
+        </div>
+
+        <div class="right-card">
+          <h3 class="right-card-title">Sugerencias</h3>
+          <div class="suggestion-item">
+            <span class="suggestion-text">GM_MagnusFan (@magnus_fan)</span>
+            <button class="btn-follow">Seguir</button>
+          </div>
+          <div class="suggestion-item">
+            <span class="suggestion-text"
+              >AjedrezParaTodos (@ajedrez_todos)</span
+            >
+            <button class="btn-follow">Seguir</button>
+          </div>
+          <div class="suggestion-item">
+            <span class="suggestion-text">ClubPawnShare (@club_oficial)</span>
+            <button class="btn-follow">Seguir</button>
+          </div>
+        </div>
+
+        <div class="right-card terms-card">
+          <a href="#" class="terms-link">Términos y Condiciones</a>
+          <a href="#" class="terms-link">Políticas de Privacidad</a>
+          <a href="#" class="terms-link">Términos Legales</a>
+        </div>
+      </aside>
+    </main>
+
+    <!--TODO: Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/core/render.js" type="module"></script>
+    <script type="module" src="../assets/js/pages/publicaciones.js"></script>
   </body>
 </html>

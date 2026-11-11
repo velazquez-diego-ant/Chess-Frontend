@@ -1,0 +1,545 @@
+/* =========================================
+   DASHBOARD - PUBLICACIONES
+   ========================================= */
+
+/* Fijamos el body para evitar scroll general */
+body {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Contenedor principal: 3 columnas (Izquierda, Centro, Derecha) */
+.dashboard-layout {
+  display: flex;
+  height: calc(100vh - 80px); /* Altura total menos el header */
+  overflow: hidden;
+  background-color: #e4e0e1;
+}
+
+/* =========================================
+   SIDEBAR IZQUIERDO (Fijo)
+   ========================================= */
+.dashboard-sidebar {
+  width: 374px;
+  min-width: 374px;
+  background-color: #f9f6f2;
+  padding: 2rem 1.5rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  overflow-y: auto; /* Scroll interno si el contenido es muy largo */
+}
+
+/* Tarjeta Usuario */
+.sidebar-user-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar-user-card:hover {
+  background-color: var(--ir-durazno);
+}
+
+.sidebar-user-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sidebar-user-name {
+  font-family: "Onest", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ir-marron-gris);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.sidebar-user-card:hover .sidebar-user-name {
+  color: var(--ir-vino);
+}
+
+/* Menú de Navegación */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-family: "Onest", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ir-marron-gris);
+  transition: all 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background-color: var(--ir-durazno);
+  color: var(--ir-vino);
+}
+
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Estado Activo */
+.sidebar-link.active {
+  background-color: var(--ir-terracota);
+  color: #f9f6f2;
+}
+
+.sidebar-link.active .sidebar-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* =========================================
+   CONTENIDO PRINCIPAL (CENTRO) - Aquí ocurre el scroll
+   ========================================= */
+.dashboard-main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #e4e0e1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  overflow-y: auto; /* Scroll solo en esta columna */
+}
+
+/* Botón Crear Publicación */
+.btn-crear-publicacion {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--ir-amarillo);
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-crear-publicacion:hover {
+  background-color: #e6c892;
+}
+
+.btn-crear-publicacion span {
+  font-family: "Onest", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ir-marron-gris);
+}
+
+.icon-crear-pub {
+  width: 24px;
+  height: 24px;
+}
+
+/* =========================================
+   TARJETA DE PUBLICACIÓN
+   ========================================= */
+.publicacion-card {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--color-blanco);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Header de la Publicación */
+.publicacion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.publicacion-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.publicacion-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.publicacion-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.publicacion-user-name {
+  font-family: "Onest", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ir-marron-gris);
+}
+
+.publicacion-fecha {
+  font-family: "Onest", sans-serif;
+  font-size: 0.8rem;
+  color: var(--ir-marron-gris);
+  opacity: 0.6;
+}
+
+/* Opciones (3 puntos) */
+.publicacion-options-container {
+  position: relative;
+}
+
+.btn-options {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btn-options img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Menú desplegable de opciones */
+.publicacion-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--color-blanco);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  min-width: 200px;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  overflow: hidden; /* Para respetar el border-radius en el hover */
+}
+
+.publicacion-dropdown.show {
+  display: flex;
+}
+
+.dropdown-item {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  justify-content: flex-start;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.dropdown-item:hover {
+  background-color: var(--ir-durazno);
+}
+
+.dropdown-item img {
+  width: 20px;
+  height: 20px;
+  filter: grayscale(100%) brightness(0.2);
+  flex-shrink: 0;
+}
+
+.dropdown-item:hover img {
+  filter: none;
+}
+
+.dropdown-item span {
+  font-family: "Onest", sans-serif;
+  font-size: 0.95rem;
+  color: var(--ir-marron-gris);
+}
+
+/* Contenido de la Publicación */
+.publicacion-content {
+  margin-bottom: 1rem;
+}
+
+.publicacion-texto {
+  font-family: "Onest", sans-serif;
+  font-size: 0.95rem;
+  color: var(--ir-marron-gris);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.publicacion-img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Footer de la Publicación (Acciones) */
+.publicacion-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 1rem;
+}
+
+.btn-action-pub {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ir-marron-gris);
+  transition: color 0.2s ease;
+}
+
+.btn-action-pub img {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-action-pub:hover {
+  color: var(--ir-rojo-pub);
+}
+
+/* Mensaje de bienvenida al final */
+.welcome-message {
+  text-align: center;
+  color: var(--ir-marron-gris);
+  opacity: 0.6;
+  margin-top: 2rem;
+}
+
+/* =========================================
+   PANEL DERECHO (Fijo)
+   ========================================= */
+.dashboard-right-sidebar {
+  width: 374px;
+  min-width: 374px;
+  background-color: #f9f6f2;
+  padding: 2rem 1.5rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* 1. Barra de Búsqueda */
+.right-search-container {
+  position: relative;
+  width: 100%;
+}
+
+.right-search-input {
+  width: 100%;
+  padding: 12px 45px 12px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 50px;
+  background-color: var(--ir-amarillo);
+  font-family: "Onest", sans-serif;
+  font-size: 0.95rem;
+  color: var(--ir-marron-gris);
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.right-search-input::placeholder {
+  color: var(--ir-marron-gris);
+  opacity: 0.7;
+}
+
+.right-search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* 2. Tarjetas del Panel Derecho */
+.right-card {
+  background-color: var(--ir-beige);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.right-card-title {
+  font-family: "Onest", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ir-vino);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.right-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.right-card-list li {
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  color: var(--ir-marron-gris);
+}
+
+/* 3. Sugerencias */
+.suggestion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.suggestion-item:last-child {
+  margin-bottom: 0;
+}
+
+.suggestion-text {
+  font-family: "Onest", sans-serif;
+  font-size: 0.85rem;
+  color: var(--ir-marron-gris);
+  max-width: 65%;
+}
+
+.btn-follow {
+  background-color: var(--ir-amarillo);
+  border: none;
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-family: "Onest", sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ir-marron-gris);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-follow:hover {
+  background-color: #e6c892;
+}
+
+/* 4. Términos Legales */
+.terms-card {
+  background-color: var(--ir-beige);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+.terms-link {
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  color: var(--ir-marron-gris);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.terms-link:hover {
+  color: var(--ir-vino);
+  text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVIDAD
+   ========================================= */
+
+/* Tablets (Reducimos el ancho de los laterales) */
+@media (max-width: 1399.98px) {
+  .dashboard-sidebar,
+  .dashboard-right-sidebar {
+    width: 300px;
+    min-width: 300px;
+  }
+}
+
+/* Tablets Pequeñas (Ocultamos el panel derecho) */
+@media (max-width: 1199.98px) {
+  .dashboard-right-sidebar {
+    display: none;
+  }
+}
+
+/* Móviles (Apilamos todo en columna) */
+@media (max-width: 991.98px) {
+  .dashboard-layout {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .dashboard-sidebar,
+  .dashboard-main-content {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .dashboard-sidebar {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+  }
+
+  .dashboard-main-content {
+    padding: 1.5rem;
+  }
+
+  .btn-crear-publicacion,
+  .publicacion-card {
+    max-width: 100%;
+  }
+}

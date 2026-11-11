@@ -11,6 +11,10 @@
   --ir-fondo: #e4e0e1;
   --color-blanco: #ffffff;
 
+  --ir-amarillo: #ffe1af;
+  --ir-blanco-humo: #f9f6f2;
+  --ir-rojo-pub: #9d0c0b;
+
   --ir-verde-bosque-hover: color-mix(
     in srgb,
     var(--ir-verde-bosque) 37%,
@@ -23,4 +27,10 @@
   --ir-terracota-hover: color-mix(in srgb, var(--ir-terracota) 63%, white);
   --ir-durazno-hover: color-mix(in srgb, var(--ir-durazno) 63%, white);
   --ir-fondo-hover: color-mix(in srgb, var(--ir-fondo) 63%, white);
+}
+
+/* Oculta el body hasta que la autenticación se resuelva */
+body.auth-pending {
+  visibility: hidden;
+  opacity: 0;
 }

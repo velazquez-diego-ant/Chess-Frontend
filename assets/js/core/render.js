@@ -1,5 +1,5 @@
-
 import { normalizeActualPageName, cerrarSesion } from "./utils.js";
+import { protegerRuta } from "./auth-guard.js";
 import {
   header_index,
   footer_index,

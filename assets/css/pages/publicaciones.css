@@ -1,5 +1,5 @@
 /* =========================================
-   DASHBOARD - PUBLICACIONES
+ *  DASHBOARD - PUBLICACIONES
    ========================================= */
 
 /* Fijamos el body para evitar scroll general */
@@ -11,13 +11,13 @@ body {
 /* Contenedor principal: 3 columnas (Izquierda, Centro, Derecha) */
 .dashboard-layout {
   display: flex;
-  height: calc(100vh - 80px); /* Altura total menos el header */
+  height: calc(100vh - 80px);
   overflow: hidden;
   background-color: #e4e0e1;
 }
 
 /* =========================================
-   SIDEBAR IZQUIERDO (Fijo)
+  * SIDEBAR IZQUIERDO (Fijo)
    ========================================= */
 .dashboard-sidebar {
   width: 374px;
@@ -29,7 +29,7 @@ body {
   flex-direction: column;
   gap: 1rem;
   height: 100%;
-  overflow-y: auto; /* Scroll interno si el contenido es muy largo */
+  overflow-y: auto;
 }
 
 /* Tarjeta Usuario */
@@ -115,7 +115,7 @@ body {
 }
 
 /* =========================================
-   CONTENIDO PRINCIPAL (CENTRO) - Aquí ocurre el scroll
+  * CONTENIDO PRINCIPAL (CENTRO) - Aquí ocurre el scroll
    ========================================= */
 .dashboard-main-content {
   flex-grow: 1;
@@ -126,7 +126,7 @@ body {
   flex-direction: column;
   align-items: center;
   height: 100%;
-  overflow-y: auto; /* Scroll solo en esta columna */
+  overflow-y: auto;
 }
 
 /* Botón Crear Publicación */
@@ -162,7 +162,7 @@ body {
 }
 
 /* =========================================
-   TARJETA DE PUBLICACIÓN
+  * TARJETA DE PUBLICACIÓN
    ========================================= */
 .publicacion-card {
   width: 100%;
@@ -244,7 +244,7 @@ body {
   z-index: 100;
   display: none;
   flex-direction: column;
-  overflow: hidden; /* Para respetar el border-radius en el hover */
+  overflow: hidden;
 }
 
 .publicacion-dropdown.show {
@@ -298,6 +298,11 @@ body {
   color: var(--ir-marron-gris);
   line-height: 1.5;
   margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .publicacion-img {
@@ -306,12 +311,53 @@ body {
   display: block;
 }
 
+/* Cuando tiene la clase expandido, mostramos todo */
+.publicacion-texto.expandido {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
 /* Footer de la Publicación (Acciones) */
 .publicacion-footer {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   padding-top: 1rem;
+}
+
+.btn-ver-mas {
+  background: transparent;
+  border: none;
+  color: var(--ir-terracota);
+  font-family: "Onest", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.btn-ver-mas:hover {
+  color: var(--ir-vino);
+  text-decoration: underline;
+}
+
+/* =========================================
+  * HASHTAGS AZULES (ESTILO FACEBOOK)
+   ========================================= */
+.hashtag {
+  color: var(--ir-azul-facebook);
+  font-weight: 600;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.hashtag:hover {
+  text-decoration: underline;
 }
 
 .btn-action-pub {
@@ -346,7 +392,7 @@ body {
 }
 
 /* =========================================
-   PANEL DERECHO (Fijo)
+  * PANEL DERECHO (Fijo)
    ========================================= */
 .dashboard-right-sidebar {
   width: 374px;
@@ -488,7 +534,293 @@ body {
 }
 
 /* =========================================
-   RESPONSIVIDAD
+  * MODAL CREAR PUBLICACIÓN
+   ========================================= */
+
+/* Overlay (Fondo oscuro) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px); 
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+/* Contenedor del Modal */
+.modal-crear-pub {
+  background-color: var(--color-blanco);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 550px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header del Modal */
+.modal-pub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-pub-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-pub-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.modal-pub-user-name {
+  font-family: "Onest", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ir-marron-gris);
+}
+
+.btn-cerrar-modal {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cerrar-modal:hover {
+  background-color: var(--ir-durazno);
+}
+
+.btn-cerrar-modal img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Textarea */
+.modal-pub-textarea {
+  width: 100%;
+  min-height: 120px;
+  border: none;
+  resize: none;
+  font-family: "Onest", sans-serif;
+  font-size: 1rem;
+  color: var(--ir-marron-gris);
+  outline: none;
+}
+
+.modal-pub-textarea::placeholder {
+  color: var(--ir-marron-gris);
+  opacity: 0.5;
+}
+
+/* Vista previa de imagen */
+.modal-pub-preview {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: 300px;
+}
+
+.modal-pub-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Acciones (Iconos) */
+.modal-pub-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 15px; 
+  padding: 10px 15px;
+}
+
+.modal-pub-actions-label {
+  font-family: "Onest", sans-serif;
+  font-size: 0.9rem;
+  color: var(--ir-marron-gris);
+}
+
+.modal-pub-actions-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-add-media {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add-media:hover {
+  background-color: var(--ir-durazno);
+}
+
+.btn-add-media img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Botón Publicar */
+.btn-publicar {
+  background-color: var(--ir-amarillo);
+  color: var(--ir-marron-gris);
+  font-family: "Onest", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-publicar:hover {
+  background-color: #e6c892;
+}
+
+.btn-publicar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loader Adaptado a PawnShare */
+.loader {
+  position: relative;
+  width: 2.5em;
+  height: 2.5em;
+  transform: rotate(165deg);
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%);
+}
+
+.loader:before {
+  animation: before8 2s infinite;
+}
+
+.loader:after {
+  animation: after6 2s infinite;
+}
+
+@keyframes before8 {
+  0% {
+    width: 0.5em;
+    box-shadow:
+      1em -0.5em rgba(96, 36, 30, 0.75),
+      -1em 0.5em rgba(183, 116, 102, 0.75);
+  }
+  35% {
+    width: 2.5em;
+    box-shadow:
+      0 -0.5em rgba(96, 36, 30, 0.75),
+      0 0.5em rgba(183, 116, 102, 0.75);
+  }
+  70% {
+    width: 0.5em;
+    box-shadow:
+      -1em -0.5em rgba(96, 36, 30, 0.75),
+      1em 0.5em rgba(183, 116, 102, 0.75);
+  }
+  100% {
+    box-shadow:
+      1em -0.5em rgba(96, 36, 30, 0.75),
+      -1em 0.5em rgba(183, 116, 102, 0.75);
+  }
+}
+
+@keyframes after6 {
+  0% {
+    height: 0.5em;
+    box-shadow:
+      0.5em 1em rgba(241, 226, 209, 0.75),
+      -0.5em -1em rgba(214, 192, 179, 0.75);
+  }
+  35% {
+    height: 2.5em;
+    box-shadow:
+      0.5em 0 rgba(241, 226, 209, 0.75),
+      -0.5em 0 rgba(214, 192, 179, 0.75);
+  }
+  70% {
+    height: 0.5em;
+    box-shadow:
+      0.5em -1em rgba(241, 226, 209, 0.75),
+      -0.5em 1em rgba(214, 192, 179, 0.75);
+  }
+  100% {
+    box-shadow:
+      0.5em 1em rgba(241, 226, 209, 0.75),
+      -0.5em -1em rgba(214, 192, 179, 0.75);
+  }
+}
+
+/* Alerta personalizada (reemplaza el alert nativo) */
+.alerta-personalizada {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  border: none;
+}
+
+/* =========================================
+ *  RESPONSIVIDAD
    ========================================= */
 
 /* Tablets (Reducimos el ancho de los laterales) */

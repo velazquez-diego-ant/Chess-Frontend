@@ -45,7 +45,7 @@ body {
 .main-registro {
   flex-grow: 1;
   width: 100%; /* NO uses 100vw aquí */
-  background-image: url("/assets/img/img-register.svg");
+  background-image: url("/assets/img/img-register.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -66,8 +66,6 @@ body {
 /* 1. Ancho de la barra (delgada pero visible) */
 ::-webkit-scrollbar {
   width: 10px;
-
-
 }
 
 /* 2. El fondo por donde se desliza */
@@ -227,20 +225,16 @@ body {
 input[type="date"].custom-input {
   color: rgba(84, 26, 26, 0.6) !important;
   -webkit-text-fill-color: rgba(84, 26, 26, 0.6) !important;
-
-
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none !important;
-
 }
 
 /* Padding extra a la derecha para los inputs que tienen el ojo */
 #pass,
 #confirm-pass {
   padding-right: 45px;
-
 }
 
 /* =========================================
@@ -254,7 +248,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
   font-family: "Onest", sans-serif !important;
   border: none !important;
-
 }
 
 /* Flechas de navegación (Mes anterior/siguiente) */
@@ -262,7 +255,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .flatpickr-next-month {
   fill: var(--ir-vino) !important;
   color: var(--ir-vino) !important;
-
 }
 
 .flatpickr-prev-month:hover,
@@ -340,8 +332,6 @@ input[type="date"].custom-input:focus {
 /* 2. Aplicar la sombra al contenedor cuando el input tiene foco */
 .input-wrapper:focus-within {
   box-shadow: 0 6px 18px rgba(64, 81, 59, 0.2);
-
-
 }
 
 /* 3. Cambiar color del texto cuando el input tiene foco */
@@ -349,7 +339,6 @@ input[type="date"].custom-input:focus {
 .input-wrapper:focus-within input[type="date"].custom-input {
   color: var(--ir-vino) !important;
   -webkit-text-fill-color: var(--ir-vino) !important;
-
 }
 
 .input-wrapper:focus-within .custom-input::placeholder {
@@ -359,8 +348,6 @@ input[type="date"].custom-input:focus {
 /* 4. Iluminar SOLO el icono de la izquierda al hacer foco en el input */
 .input-wrapper:focus-within .input-icon {
   opacity: 1;
-
-
 }
 
 /* =========================================
@@ -529,7 +516,6 @@ input[type="password"]#confirm-pass::placeholder {
   text-decoration: none;
 }
 
-
 /* =========================================
    *  MEDIA QUERIES (Responsividad)
    ========================================= */
@@ -548,7 +534,6 @@ input[type="password"]#confirm-pass::placeholder {
   .contenedor-formulario {
     justify-content: flex-end;
     padding-right: 3rem;
-
   }
 }
 
@@ -559,7 +544,6 @@ input[type="password"]#confirm-pass::placeholder {
     margin: 20px 0;
   }
 }
-
 
 @media (max-width: 576px) {
   .caja-formulario {

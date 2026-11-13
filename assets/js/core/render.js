@@ -1,5 +1,6 @@
+// assets/js/core/render.js
+
 import { normalizeActualPageName, cerrarSesion } from "./utils.js";
-import { protegerRuta } from "./auth-guard.js";
 import {
   header_index,
   footer_index,
@@ -19,33 +20,78 @@ const body = document.querySelector("body");
 const nombrePagina =
   normalizeActualPageName(window.location.pathname) || "index";
 
-//* ================= CONFIGURACIÓN POR PÁGINA =================
+// =========================================
+// DETECTAR LA PROFUNDIDAD DE LA PÁGINA ACTUAL
+// =========================================
+// Si estamos en /pages/ (publicaciones, comunidad, etc.) el prefijo es "../"
+// Si estamos en la raíz (index.html) el prefijo es "./"
+const esPaginaInterna = window.location.pathname.includes("/pages/");
+const prefix = esPaginaInterna ? "../" : "./";
+
+// =========================================
+// FUNCIÓN AUXILIAR PARA REEMPLAZAR RUTAS
+// =========================================
+// Reemplaza las rutas de las plantillas que empiezan con "./" por el prefijo correcto
+// Esto hace que las imágenes del header funcionen en ambos contextos
+function procesarRutas(html) {
+  if (!html) return "";
+  // Reemplaza src="./ por src="PREFIX y src="../ por src="PREFIX
+  return html
+    .replace(/src="\.\//g, `src="${prefix}`)
+    .replace(/src="\.\.\//g, `src="${prefix}`)
+    .replace(/href="\.\//g, `href="${prefix}`)
+    .replace(/href="\.\.\//g, `href="${prefix}`);
+}
+
+// =========================================
+// CONFIGURACIÓN POR PÁGINA (Con procesamiento)
+// =========================================
 const layouts = {
-  index: { header: header_index, footer: footer_index },
-  publicaciones: { header: header_publicaciones, footer: footer_publicaciones },
-  comunidad: { header: header_comunidad, footer: footer_comunidad },
-  guia: { header: header_guia, footer: footer_guia },
-  contacto: { header: header_contacto, footer: footer_contacto },
-  login: { header: header_login, footer: null },
-  register: { header: header_register, footer: null },
-  registro: { header: header_register, footer: null },
+  index: {
+    header: procesarRutas(header_index),
+    footer: procesarRutas(footer_index),
+  },
+  publicaciones: {
+    header: procesarRutas(header_publicaciones),
+    footer: procesarRutas(footer_publicaciones),
+  },
+  comunidad: {
+    header: procesarRutas(header_comunidad),
+    footer: procesarRutas(footer_comunidad),
+  },
+  guia: {
+    header: procesarRutas(header_guia),
+    footer: procesarRutas(footer_guia),
+  },
+  contacto: {
+    header: procesarRutas(header_contacto),
+    footer: procesarRutas(footer_contacto),
+  },
+  login: {
+    header: procesarRutas(header_login),
+    footer: null,
+  },
+  register: {
+    header: procesarRutas(header_register),
+    footer: null,
+  },
+  registro: {
+    header: procesarRutas(header_register),
+    footer: null,
+  },
 };
 
-//* ================= RENDER =================
+// =========================================
+// RENDER
+// =========================================
 const layout = layouts[nombrePagina] ?? layouts.index;
 renderHeader(layout);
 renderFooter(layout);
 renderAuthUI();
 
-//* Cualquier enlace con data-cerrar-sesion borra la sesión antes de salir
-document.addEventListener("click", (e) => {
-  const enlace = e.target.closest("[data-cerrar-sesion]");
-  if (!enlace) return;
-  e.preventDefault();
-  cerrarSesion();
-});
-
-//* // ================= FUNCIONES =================
+// =========================================
+// FUNCIONES
+// =========================================
 
 function renderHeader({ header }) {
   if (!header) return;
@@ -62,41 +108,39 @@ function renderFooter({ footer }) {
   }
 }
 
-//* ==========================================
-//* LÓGICA DE USUARIO LOGUEADO / INVITADO
-//* ==========================================
+// =========================================
+// LÓGICA DE USUARIO LOGUEADO / INVITADO
+// =========================================
 function renderAuthUI() {
   const authContainer = document.getElementById("auth-container");
 
-  //* Si la página no tiene contenedor de auth (ej. login/register), no hacemos nada
   if (!authContainer) return;
 
   const sesionActiva = localStorage.getItem("sesionActiva") === "true";
   const nombreUsuario = localStorage.getItem("nombreUsuario") || "Usuario";
-  const prefix = nombrePagina === "index" ? "./" : "../";
 
   if (sesionActiva) {
-    //* ---- HTML DEL PERFIL LOGUEADO ----
+    // HTML DEL PERFIL LOGUEADO
     authContainer.innerHTML = `
-            <a class="header-flag-link" aria-label="Cambiar idioma">
-                <img src="${prefix}assets/img/icons/icon-bandera.svg" alt="Bandera México" class="header-flag-icon">
-            </a>
-            <div class="profile-dropdown-container">
-                <button class="profile-btn" id="profileBtn">
-                    <span class="profile-name">${nombreUsuario}</span>
-                    <img src="${prefix}assets/img/icons/mode-clear/icon-img-profile.svg" alt="Perfil" class="profile-avatar">
-                    <img src="${prefix}assets/img/icons/mode-clear/icon-arrow-between.svg" alt="Menú" class="profile-arrow">
-                </button>
-                
-                <div class="profile-menu" id="profileMenu">
-                    <a href="#" class="profile-menu-item"><span>Perfil</span></a>
-                    <a href="#" class="profile-menu-item"><span>Configuración</span></a>
-                    <a href="#" class="profile-menu-item" data-cerrar-sesion><span>Cerrar sesión</span></a>
-                </div>
-            </div>
-        `;
+      <a class="header-flag-link" aria-label="Cambiar idioma">
+        <img src="${prefix}assets/img/icons/icon-bandera.svg" alt="Bandera México" class="header-flag-icon">
+      </a>
+      <div class="profile-dropdown-container">
+        <button class="profile-btn" id="profileBtn">
+          <span class="profile-name">${nombreUsuario}</span>
+          <img src="${prefix}assets/img/icons/mode-clear/icon-img-profile.svg" alt="Perfil" class="profile-avatar">
+          <img src="${prefix}assets/img/icons/mode-clear/icon-arrow-between.svg" alt="Menú" class="profile-arrow">
+        </button>
+        
+        <div class="profile-menu" id="profileMenu">
+          <a href="#" class="profile-menu-item"><span>Perfil</span></a>
+          <a href="#" class="profile-menu-item"><span>Configuración</span></a>
+          <a href="#" class="profile-menu-item" data-cerrar-sesion><span>Cerrar sesión</span></a>
+        </div>
+      </div>
+    `;
 
-    //* Lógica para abrir/cerrar el menú desplegable
+    // Lógica para abrir/cerrar el menú desplegable
     const profileBtn = document.getElementById("profileBtn");
     const profileMenu = document.getElementById("profileMenu");
 
@@ -113,10 +157,20 @@ function renderAuthUI() {
       });
     }
   } else {
-    //* ---- HTML DE INVITADO ----
+    // HTML DE INVITADO
     authContainer.innerHTML = `
-            <a href="${prefix}pages/login.html" class="btn-iniciar">Iniciar sesión</a>
-            <a href="${prefix}pages/register.html" class="btn-registrar">Registrarse</a>
-        `;
+      <a href="${prefix}pages/login.html" class="btn-iniciar">Iniciar sesión</a>
+      <a href="${prefix}pages/register.html" class="btn-registrar">Registrarse</a>
+    `;
   }
 }
+
+// =========================================
+// LOGOUT
+// =========================================
+document.addEventListener("click", (e) => {
+  const enlace = e.target.closest("[data-cerrar-sesion]");
+  if (!enlace) return;
+  e.preventDefault();
+  cerrarSesion();
+});

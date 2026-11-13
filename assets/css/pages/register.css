@@ -45,7 +45,7 @@ body {
 .main-registro {
   flex-grow: 1;
   width: 100%; /* NO uses 100vw aquí */
-  background-image: url("/assets/img/img-register.png");
+  background-image: url("../../img/img-register.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

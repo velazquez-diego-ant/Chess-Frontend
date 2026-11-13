@@ -1,10 +1,9 @@
-
 //* ===== index.html =====
 export const header_index = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
         <a class="navbar-brand" href="./index.html">
-          <img src="./assets/img/icons/mode-clear/icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
+          <img src="../assets/img/icons/mode-clear/Icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -38,7 +37,7 @@ export const header_publicaciones = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
         <a class="navbar-brand" href="../index.html">
-          <img src="../assets/img/icons/mode-clear/icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
+          <img src="../assets/img/icons/mode-clear/Icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -71,7 +70,7 @@ export const header_comunidad = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
         <a class="navbar-brand" href="../index.html">
-          <img src="../assets/img/icons/mode-clear/icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
+          <img src="../assets/img/icons/mode-clear/Icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -104,7 +103,7 @@ export const header_guia = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
         <a class="navbar-brand" href="../index.html">
-          <img src="../assets/img/icons/mode-clear/icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
+          <img src="../assets/img/icons/mode-clear/Icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -137,7 +136,7 @@ export const header_contacto = `
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container-fluid px-4 px-lg-5">
         <a class="navbar-brand" href="../index.html">
-          <img src="../assets/img/icons/mode-clear/icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
+          <img src="../assets/img/icons/mode-clear/Icon-pawnShare.svg" alt="PawnShare Logo" class="logo" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

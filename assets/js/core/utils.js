@@ -33,16 +33,30 @@ export function normalizeActualPageName(url) {
  * @param {string|number} userId - El ID del usuario obtenido del localStorage o sesión.
  * @returns {number|null} - Retorna el ID numérico si está logueado, o null si no.
  */
+export function normalizeActualPageName(url) {
+  const splittedUrl = url.split("/");
+  const pageNameAndExtension = splittedUrl.at(-1);
+
+  if (!pageNameAndExtension) return "index";
+
+  const splitNameAndExtension = pageNameAndExtension.split(".");
+  const pageName = splitNameAndExtension[0];
+  return pageName || "index";
+}
+
+/**
+ * Verifica que el usuario tenga una sesión activa.
+ */
 export function ensureLoggedIn(userId) {
   if (userId != null && userId !== "") {
     return Number(userId);
   }
-  // Redirigimos al login usando la ruta correcta de PawnShare
-  window.location.href = "/pages/login.html";
+  // Redirigir al login (ruta relativa)
+  window.location.href = "login.html";
   return null;
 }
 
-// Claves que guarda login.js al iniciar sesión en PawnShare
+// Claves que guarda login.js al iniciar sesión
 const CLAVES_SESION = [
   "sesionActiva",
   "usuarioId",
@@ -52,11 +66,18 @@ const CLAVES_SESION = [
 ];
 
 /**
- * Borra la sesión del localStorage y manda al inicio (index.html).
- * Las preferencias (tema, vista) se conservan porque no son de la sesión.
+ * Borra la sesión del localStorage y manda al inicio.
+ * CORREGIDO: Detecta si estamos en /pages/ o en la raíz para redirigir correctamente.
  */
 export function cerrarSesion() {
   CLAVES_SESION.forEach((clave) => localStorage.removeItem(clave));
-  // Redirigimos al index de PawnShare
-  window.location.replace("/index.html");
+
+  // Detectar si estamos en la carpeta /pages/ o en la raíz
+  const esPaginaInterna = window.location.pathname.includes("/pages/");
+  
+  // Si estamos en /pages/, subir un nivel (../index.html)
+  // Si estamos en la raíz, ir directo (./index.html)
+  const rutaIndex = esPaginaInterna ? "../index.html" : "./index.html";
+
+  window.location.replace(rutaIndex);
 }

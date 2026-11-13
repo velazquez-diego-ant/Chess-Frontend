@@ -13,23 +13,8 @@ export function protegerRuta() {
   const usuarioId = localStorage.getItem("usuarioId");
 
   if (!sesionActiva || !usuarioId) {
-    // No está logueado: Redirigimos sin mostrar el body
-    window.location.replace("./login.html");
+    window.location.replace("../pages/login.html");
     return false;
   }
-
-  // Está logueado: Mostramos el body quitando la clase de ocultamiento
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.remove("auth-pending");
-  });
-
-  // Si el DOMContentLoaded ya pasó (porque el script cargó tarde), quitamos la clase directamente
-  if (
-    document.readyState === "interactive" ||
-    document.readyState === "complete"
-  ) {
-    document.body.classList.remove("auth-pending");
-  }
-
   return true;
 }

@@ -14,9 +14,19 @@ import {
 const body = document.querySelector("body");
 const nombrePagina = normalizeActualPageName(window.location.pathname) || "index";
 
+// Siempre quitamos la clase, sin importar si está logueado o no.
+// La protección de ruta (redirección) la maneja init-guard.js aparte.
+body.classList.remove("auth-pending");
+
+// =========================================
+//* PREFIJO PARA RUTAS
+// =========================================
 const esPaginaInterna = window.location.pathname.includes("/pages/");
 const prefix = esPaginaInterna ? "../" : "./";
 
+// =========================================
+//* CONFIGURACIÓN POR PÁGINA
+// =========================================
 const layouts = {
   index: { header: header_index, footer: footer_index },
   publicaciones: { header: header_publicaciones, footer: footer_publicaciones },
@@ -33,6 +43,10 @@ renderHeader(layout);
 renderFooter(layout);
 renderAuthUI();
 
+// =========================================
+//* FUNCIONES
+// =========================================
+
 function renderHeader({ header }) {
   if (!header) return;
   body.insertAdjacentHTML("afterbegin", header);
@@ -48,6 +62,9 @@ function renderFooter({ footer }) {
   }
 }
 
+// =========================================
+//* LÓGICA DE USUARIO LOGUEADO / INVITADO
+// =========================================
 function renderAuthUI() {
   const authContainer = document.getElementById("auth-container");
   if (!authContainer) return;
@@ -95,6 +112,9 @@ function renderAuthUI() {
   }
 }
 
+// =========================================
+//* LOGOUT
+// =========================================
 document.addEventListener("click", (e) => {
   const enlace = e.target.closest("[data-cerrar-sesion]");
   if (!enlace) return;
